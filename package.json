@@ -1,0 +1,19 @@
+{
+  "name": "drawingapp",
+  "version": "1.0.0",
+  "description": "react + materialize drawing app",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Ben Wilcox",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.13.4"
+  },
+  "devDependencies": {
+    "gulp": "^3.9.1",
+    "gulp-clean": "^0.3.2",
+    "gulp-sass": "^2.2.0"
+  }
+}
