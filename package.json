@@ -4,7 +4,8 @@
   "description": "react + materialize drawing app",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "coverage": "./node_modules/.bin/istanbul cover ./node_modules/.bin/jasmine-node ./dev/tests/**/*"
   },
   "author": "Ben Wilcox",
   "license": "MIT",
@@ -16,6 +17,8 @@
     "gulp": "^3.9.1",
     "gulp-clean": "^0.3.2",
     "gulp-sass": "^2.2.0",
+    "istanbul": "^0.4.2",
+    "jasmine-node": "^1.14.5",
     "watchify": "^3.7.0"
   }
 }
