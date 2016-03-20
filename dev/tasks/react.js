@@ -18,7 +18,7 @@ gulp.task('react', function() {
             transform: [reactify],
         })
         .bundle()
-        .pipe(source("bundle.js"))
+        .pipe(source("dist/js/componentsbundle.js"))
         .pipe(streamify(uglify()))
         .pipe(gulp.dest("."))
 });
