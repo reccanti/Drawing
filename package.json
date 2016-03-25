@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "coverage": "istanbul cover jasmine-node ./dev/tests/**/*"
+    "coverage": "jest --coverage"
   },
   "author": "Ben Wilcox",
   "license": "MIT",
@@ -24,6 +24,7 @@
     "gulp-uglify": "^1.5.3",
     "istanbul": "^0.4.2",
     "jasmine-node": "^1.14.5",
+    "jest-cli": "^0.9.2",
     "reactify": "^1.1.1",
     "streamify": "^0.2.5",
     "vinyl-source-stream": "^1.1.0",
