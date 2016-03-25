@@ -17,6 +17,7 @@
   },
   "devDependencies": {
     "browserify": "^13.0.0",
+    "coveralls": "^2.11.9",
     "gulp": "^3.9.1",
     "gulp-clean": "^0.3.2",
     "gulp-sass": "^2.2.0",
@@ -29,8 +30,5 @@
     "streamify": "^0.2.5",
     "vinyl-source-stream": "^1.1.0",
     "watchify": "^3.7.0"
-  }, 
-  "jest": {
-     "collectCoverage": true
   }
 }
