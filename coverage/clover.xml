@@ -1,6 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1458881593795" clover="3.2.0">
-	<project timestamp="1458881593796"  name="All Files" >
-		<metrics statements="0"  coveredstatements="0"  conditionals="0"  coveredconditionals="0"  methods="0"  coveredmethods="0"  elements="0"  coveredelements="0"  complexity="0"  packages="0"  files="0"  classes="0"  loc="0"  ncloc="0" />
+<coverage generated="1458958471174" clover="3.2.0">
+	<project timestamp="1458958471174"  name="All Files" >
+		<metrics statements="6"  coveredstatements="5"  conditionals="0"  coveredconditionals="0"  methods="2"  coveredmethods="1"  elements="8"  coveredelements="6"  complexity="0"  packages="1"  files="1"  classes="1"  loc="167"  ncloc="167" />
+		<package name="components" >
+			<metrics statements="6"  coveredstatements="5"  conditionals="0"  coveredconditionals="0"  methods="2"  coveredmethods="1" />
+			<file name="canvas.jsx"  path="/Users/benjaminwilcox/Projects/active/Drawing/src/js/components/canvas.jsx" >
+				<metrics statements="6"  coveredstatements="5"  conditionals="0"  coveredconditionals="0"  methods="2"  coveredmethods="1" />
+				<line num="146"  count="1"  type="stmt" />
+				<line num="147"  count="1"  type="stmt" />
+				<line num="149"  count="1"  type="stmt" />
+				<line num="151"  count="0"  type="stmt" />
+				<line num="154"  count="1"  type="stmt" />
+				<line num="167"  count="1"  type="stmt" />
+			</file>
+		</package>
 	</project>
 </coverage>

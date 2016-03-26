@@ -147,14 +147,16 @@ var React = require('react');
 var ReactDom = require('react-dom');
 
 var DrawingCanvas = React.createClass({
+    testFunc: function() {
+        console.log("NOTHING");
+    },
     render: function() {
         return(
             <div className="DrawingCanvas card">
                 <canvas 
                     className="DrawingCanvas_canvas" 
                     width={this.props.width}
-                    height={this.props.height}
-                    ref="canvas">
+                    height={this.props.height}>
                 </canvas>
             </div>
         );
@@ -162,7 +164,10 @@ var DrawingCanvas = React.createClass({
 });
 
 
-ReactDom.render(
-    <DrawingCanvas width={500} height={500} />,
-    document.getElementById("container")
-);
+module.exports = DrawingCanvas;
+
+
+// ReactDom.render(
+//     <DrawingCanvas width={500} height={500} />,
+//     document.getElementById("container")
+// );
