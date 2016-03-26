@@ -9,7 +9,7 @@ env:
   matrix:
    - NODE_ENV=development
    - NODE_ENV=production
-before_install: npm install jest-cli babel-jest babel-preset-react babel-preset-es2015 coveralls
+before_install: npm install jest-cli babel-jest babel-preset-react babel-preset-es2015 react-addons-test-utils coveralls
 script: npm run coverage
 after_success:
  - cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js
