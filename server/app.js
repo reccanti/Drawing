@@ -87,10 +87,8 @@ app.use(cookieParser());
 app.get("/", function(req, res) {
     res.render("index");
 });
-// app.post("/signup", function() {
-//     console.log("signing up");
-// });
 app.use("/signup", routes.signup);
+app.use("/login", routes.login);
 app.listen(port, function(err) {
    if (err) {
        console.log("Could not connect to port " + port);

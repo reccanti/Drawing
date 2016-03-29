@@ -8,6 +8,7 @@ var Link = ReactRouter.Link;
 var browserHistory = ReactRouter.browserHistory;
 
 var SignupLayout = require("../layout/signup.jsx");
+var LoginLayout = require("../layout/login.jsx");
 
 /**
  * Set up the Routes for the React app
@@ -15,6 +16,7 @@ var SignupLayout = require("../layout/signup.jsx");
 ReactDOM.render(
     <Router history={browserHistory} >
         <Route path="/" component={SignupLayout} />
+        <Route path="/login" component={LoginLayout} />
     </Router>,
     document.getElementById("container")
 );

@@ -92,7 +92,7 @@ UserSchema.methods.validatePassword = function(password, callback) {
  */
 UserSchema.statics.findByUsername = function(uname, callback) {
     var search = {
-        username: name
+        username: uname
     };
     return UserModel.findOne(search, callback);
 };

@@ -3,6 +3,27 @@ var User = models.User;
 
 
 /**
+ * The function attempts to log the user into the account.
+ * It first checks to see that all of the required fields are there.
+ * 
+ * If this is successful, it authenticates the information. If it 
+ * authenticates correctly, it redirects to the account.
+ */
+var login = function(req, res) {
+    if (!req.body.username || !req.body.password) {
+        res.status(400).json({error: "All fields are required"});
+    }
+    User.Model.authenticate(req.body.username, req.body.password, function(err, account) {
+        if (err || !account) {
+            return res.status(401).json({error: "wrong username"});
+        }
+        req.session.account = account.toAPI();
+        res.status(200).json({redirect: "/user"});
+    });
+};
+
+
+/**
  * This function attempts to sign a user into the system.
  * It first validates the inputs, ensuring that all the required
  * fields have been filled and that each of the password fields
@@ -37,10 +58,11 @@ var signup = function(req, res) {
             }
             console.log("saved");
             req.session.account = newUser.toAPI();
-            res.json({redirect: "/account"});
+            res.status(200).json({redirect: "/login"});
         })
     });
 }
 
 
 module.exports.signup = signup;
+module.exports.login = login;
