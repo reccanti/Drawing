@@ -84,7 +84,7 @@ app.use(cookieParser());
 //    } 
 //    return;
 // });
-app.get("/", function(req, res) {
+app.get("*", function(req, res) {
     res.render("index");
 });
 app.use("/signup", routes.signup);

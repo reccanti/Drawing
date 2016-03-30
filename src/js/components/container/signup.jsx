@@ -1,5 +1,5 @@
 var React = require("react");
-var SignupForm = require("../components/signupForm.jsx");
+var SignupForm = require("./signupForm.jsx");
 
 var SignupLayout = React.createClass({
    render: function() {

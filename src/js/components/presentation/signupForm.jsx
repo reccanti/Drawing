@@ -1,30 +1,78 @@
 var React = require('react');
 var browserHistory = require('react-router').browserHistory;
+var store = require("../stores/reduxStore.js");
+var connect = require("react-redux").connect;
 var $ = require('jquery');
 
 /**
- * This handles the creation of a User
+ * This is the form that will allow the user to create an
+ * account in the database.
  */
 var SignupForm = React.createClass({
+    
+    
+    /**
+     * Store the value of the password input in the component's
+     * state
+     */
+    componentDidMount: function() {
+        // if (!!this.props.redirect) {
+        //     browserHistory.push(this.props.redirect);
+        // }
+    },
+    
+    
+    /**
+     * Set the initial state of the component
+     */
     getInitialState: function() {
         return {
             username: "",
             password: "",
             passwordConfirmed: ""
         };
-    },
+    },    
+    
+    
+    /**
+     * Store the value of the username input in the component's
+     * state
+     */
     setUsername: function(e) {
         this.setState({"username": e.target.value});
     },
+    
+    
+    /**
+     * Store the value of the name input in the component's
+     * state
+     */
     setName: function(e) {
         this.setState({"name": e.target.value});
     },
+    
+    
+    /**
+     * Store the value of the password input in the component's
+     * state
+     */
     setPassword: function(e) {
         this.setState({"password": e.target.value});
     },
+    
+    
+    /**
+     * Store the value of the confirmed password input in the
+     * component's state
+     */
     setPasswordConfirmed: function(e) {
         this.setState({"passwordConfirmed": e.target.value});
     },
+    
+    
+    /**
+     * Submit the information from the form via an AJAX call
+     */
     submitForm: function(e) {
         e.preventDefault();
         console.log("submitting...");
@@ -40,14 +88,21 @@ var SignupForm = React.createClass({
             },
             dataType: "json",
             success: function(result, status, xhr) {
-                console.log(result);
-                browserHistory.push(result.redirect);
+                store.dispatch({
+                    type: "USER_LOGIN",
+                    name: "user"
+                });
             },
             error: function(xhr, status, error) {
                 console.log(JSON.parse(xhr.responseText));
             }
         });
     },
+    
+    
+    /**
+     * Render the Form
+     */
     render: function() {
         return (
             <form action="/signup" method="POST" onSubmit={this.submitForm}>
@@ -65,4 +120,11 @@ var SignupForm = React.createClass({
     }
 });
 
-module.exports = SignupForm;
+var component = connect(function (store) {
+    return {
+        redirect: "/login"
+    }
+})(SignupForm);
+
+
+module.exports = component;

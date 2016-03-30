@@ -13,7 +13,7 @@ var uglify = require("gulp-uglify");
  */
 gulp.task('react', function() {
     return browserify({
-            entries: ["./src/js/routers/route.jsx"],
+            entries: ["./src/js/components/container/route.jsx"],
             debug: true,
             transform: [reactify],
         })
