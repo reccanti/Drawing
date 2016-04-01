@@ -58,8 +58,8 @@ var signup = function(req, res) {
             }
             console.log("saved");
             req.session.account = newUser.toAPI();
-            res.status(200).json({redirect: "/login"});
-        })
+            res.status(200).json(newUser.toAPI());
+        });
     });
 }
 

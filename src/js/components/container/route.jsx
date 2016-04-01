@@ -11,7 +11,7 @@ var Provider = require("react-redux").Provider;
 var store = require("../../stores/reduxStore.js");
 
 var SignupLayout = require("./signup.jsx");
-// var LoginLayout = require("./login.jsx");
+var LoginLayout = require("./login.jsx");
 var AppLayout = require("./app.jsx");
 
 
@@ -21,9 +21,9 @@ var AppLayout = require("./app.jsx");
 var checkAuth = function(nextState, replace) {
     console.log("checking");
     console.log(store.getState());
-    if (!store.getState().sessionState.username) {
+    if (!store.getState().loginState.username) {
         replace({
-            pathname: "/signup"
+            pathname: "/login"
         });
     }
 };
@@ -37,6 +37,7 @@ ReactDOM.render(
         <Router history={browserHistory} >
             <Route path="/" component={AppLayout} onEnter={checkAuth} />
             <Route path="/signup" component={SignupLayout} />
+            <Route path="/login" component={LoginLayout} />
         </Router>
     </Provider>,
     document.getElementById("container")

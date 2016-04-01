@@ -1,37 +1,11 @@
 var React = require('react');
-var browserHistory = require('react-router').browserHistory;
-var store = require("../stores/reduxStore.js");
-var connect = require("react-redux").connect;
-var $ = require('jquery');
+var Link = require("react-router").Link;
 
 /**
  * This is the form that will allow the user to create an
  * account in the database.
  */
 var SignupForm = React.createClass({
-    
-    
-    /**
-     * Store the value of the password input in the component's
-     * state
-     */
-    componentDidMount: function() {
-        // if (!!this.props.redirect) {
-        //     browserHistory.push(this.props.redirect);
-        // }
-    },
-    
-    
-    /**
-     * Set the initial state of the component
-     */
-    getInitialState: function() {
-        return {
-            username: "",
-            password: "",
-            passwordConfirmed: ""
-        };
-    },    
     
     
     /**
@@ -71,32 +45,18 @@ var SignupForm = React.createClass({
     
     
     /**
-     * Submit the information from the form via an AJAX call
+     * collect the data from the form and pass it to the container's
+     * signup function
      */
     submitForm: function(e) {
         e.preventDefault();
-        console.log("submitting...");
-        $.ajax({
-            cache: false,
-            type: "POST",
-            url: "/signup",
-            data: {
-                username: this.state.username,
-                name: this.state.name,
-                password: this.state.password,
-                password_conf: this.state.passwordConfirmed
-            },
-            dataType: "json",
-            success: function(result, status, xhr) {
-                store.dispatch({
-                    type: "USER_LOGIN",
-                    name: "user"
-                });
-            },
-            error: function(xhr, status, error) {
-                console.log(JSON.parse(xhr.responseText));
-            }
-        });
+        data = {
+            username: this.state.username,
+            name: this.state.name,
+            password: this.state.password,
+            password_conf: this.state.passwordConfirmed
+        };
+        this.props.signup(data);
     },
     
     
@@ -115,16 +75,9 @@ var SignupForm = React.createClass({
                 <label htmlFor="password_conf">Confirm Password</label>
                 <input type="text" name="password_conf" onChange={this.setPasswordConfirmed} />
                 <button type="submit">Submit</button>
+                <Link to="/">Return to Home</Link>
             </form>
         );
     }
 });
-
-var component = connect(function (store) {
-    return {
-        redirect: "/login"
-    }
-})(SignupForm);
-
-
-module.exports = component;
+module.exports = SignupForm;

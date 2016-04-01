@@ -1,43 +1,47 @@
 var React = require('react');
-var $ = require('jquery');
+var Link = require('react-router').Link;
 
 /**
- * This handles the creation of a User
+ * This form allows the user to log in to their account.
  */
 var LoginForm = React.createClass({
-    getInitialState: function() {
-        return {
-            username: "",
-            password: ""
-        };
-    },
+    
+    
+    /**
+     * Store the value of the username input in the component's
+     * state
+     */
     setUsername: function(e) {
         this.setState({"username": e.target.value});
     },
+    
+    
+    /**
+     * Store the value of the password input in the component's
+     * state
+     */
     setPassword: function(e) {
         this.setState({"password": e.target.value});
     },
+    
+    
+    /**
+     * Collect the form's data and pass it to the container's
+     * login function
+     */
     submitForm: function(e) {
         e.preventDefault();
-        console.log("submitting...");
-        $.ajax({
-            cache: false,
-            type: "POST",
-            url: "/login",
-            data: {
-                username: this.state.username,
-                password: this.state.password
-            },
-            dataType: "json",
-            success: function(result, status, xhr) {
-                console.log(result);
-                browserHistory.push(result.redirect);
-            },
-            error: function(xhr, status, error) {
-                console.log(JSON.parse(xhr.responseText));
-            }
-        });
+        var data = {
+            username: this.state.username,
+            password: this.state.password
+        }
+        this.props.login(data);
     },
+    
+    
+    /**
+     * Render the login form
+     */
     render: function() {
         return (
             <form action="/login" method="POST" onSubmit={this.login}>
@@ -46,6 +50,9 @@ var LoginForm = React.createClass({
                 <label htmlFor="password">Password</label>
                 <input type="text" name="password" onChange={this.setPassword} />
                 <button type="submit">Submit</button>
+                
+                <Link to="/signup">Sign up for an account</Link>
+                <Link to="/">Return to Home</Link>
             </form>
         );
     }

@@ -22,7 +22,7 @@ var AppLayout = React.createClass({
  */
 var component = connect(function(store) {
     return {
-        username: store.sessionState.username
+        username: store.loginState.username
     };
 })(AppLayout);
 
