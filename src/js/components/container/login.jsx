@@ -15,7 +15,7 @@ var LoginLayout = React.createClass({
      * AJAX and authenticate it. Perform any store functions
      * afterwards
      */
-    signup: function(data) {
+    login: function(data) {
         store.dispatch({
             type: "LOGIN_WAITING"
         });
@@ -50,7 +50,7 @@ var LoginLayout = React.createClass({
      */
    render: function() {
        return (
-           <LoginForm />
+           <LoginForm login={this.login} />
        );
    } 
 });

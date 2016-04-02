@@ -18,7 +18,7 @@ var login = function(req, res) {
             return res.status(401).json({error: "wrong username"});
         }
         req.session.account = account.toAPI();
-        res.status(200).json({redirect: "/user"});
+        res.status(200).json(account.toAPI());
     });
 };
 
@@ -33,7 +33,6 @@ var login = function(req, res) {
  * saves it into the database
  */
 var signup = function(req, res) {
-    console.log("in signup");
     if (!req.body.username ||
         !req.body.name ||
         !req.body.password ||
@@ -56,7 +55,6 @@ var signup = function(req, res) {
                 console.error(err);
                 return res.status(400).json({error: "an error occurred when saving your account to the database"});
             }
-            console.log("saved");
             req.session.account = newUser.toAPI();
             res.status(200).json(newUser.toAPI());
         });

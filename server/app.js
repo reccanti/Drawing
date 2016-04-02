@@ -84,6 +84,10 @@ app.use(cookieParser());
 //    } 
 //    return;
 // });
+app.get("/session", function(req, res) {
+    console.log("got it");
+    res.status(200).json({ session: "hello elo" });
+});
 app.get("*", function(req, res) {
     res.render("index");
 });

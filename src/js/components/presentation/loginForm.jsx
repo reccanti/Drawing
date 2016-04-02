@@ -44,7 +44,7 @@ var LoginForm = React.createClass({
      */
     render: function() {
         return (
-            <form action="/login" method="POST" onSubmit={this.login}>
+            <form action="/login" method="POST" onSubmit={this.submitForm}>
                 <label htmlFor="username">Username</label>
                 <input type="text" name="username" onChange={this.setUsername} />
                 <label htmlFor="password">Password</label>
