@@ -11,9 +11,4 @@ router.post("/", function(req, res) {
     User.login(req, res);
 });
 
-
-router.get("/", function() {
-    console.log("Hello");
-});
-
 module.exports = router;

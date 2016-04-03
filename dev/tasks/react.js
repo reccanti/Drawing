@@ -15,6 +15,7 @@ gulp.task('react', function() {
     return browserify({
             entries: ["./src/js/components/container/route.jsx"],
             debug: true,
+            fast: true,
             transform: [reactify],
         })
         .bundle()

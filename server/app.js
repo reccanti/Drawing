@@ -80,19 +80,18 @@ app.use(cookieParser());
 // app.use(csrf());
 // app.use(function(err, req, res, next) {
 //    if (err.code !== "EBADCSRFTOKEN") {
+//        console.log("Nope!");
 //        return next(err);
 //    } 
+//    console.log("Nope!");
 //    return;
 // });
-app.get("/session", function(req, res) {
-    console.log("got it");
-    res.status(200).json({ session: "hello elo" });
-});
+app.use("/session", routes.session);
+app.use("/signup", routes.signup);
+app.use("/login", routes.login);
 app.get("*", function(req, res) {
     res.render("index");
 });
-app.use("/signup", routes.signup);
-app.use("/login", routes.login);
 app.listen(port, function(err) {
    if (err) {
        console.log("Could not connect to port " + port);

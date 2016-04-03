@@ -25,15 +25,18 @@ require("whatwg-fetch");
 //         });
 //     }
 // });
-fetch("/session", {
-    type: "GET"
-})
-    .then(function(response) {
-        return response.json();
-    })
-    .then(function(json) {
-        console.log(json);
-    });
+// console.log("fetching");
+// fetch("/session", {
+//     type: "GET"
+// })
+//     .then(function(response) {
+//         console.log("got json");
+//         return response.json();
+//     })
+//     .then(function(json) {
+//         console.log("parsing json");
+//         console.log(json);
+//     });
 
 
 var initialState = {
@@ -62,7 +65,6 @@ var initialState = {
  * This creates the store from the reducers
  */
 var reducers = Redux.combineReducers({
-    //sessionState: SessionReducer,
     loginState: reducers.Login
 });
 var DrawingStore = Redux.createStore(

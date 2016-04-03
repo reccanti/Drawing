@@ -23,6 +23,9 @@ var LoginReducer = function(state, action) {
         var newState = _.assign({}, baseState, action.error);
         return newState;  
     }
+    else if (action.type === "LOGOUT") {
+        return baseState;
+    }
     return state;   
 }
 

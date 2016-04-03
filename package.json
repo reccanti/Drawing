@@ -7,7 +7,8 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "buildReact": "gulp react",
     "coverage": "jest --coverage",
-    "start": "gulp react && node server/app.js"
+    "start": "gulp react && node server/app.js",
+    "debug": "gulp react && DEBUG=express:* node server/app.js"
   },
   "author": "Ben Wilcox",
   "license": "MIT",
