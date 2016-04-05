@@ -9,6 +9,9 @@ node_js:
  - '0.10'
 services:
   - mongodb
+cache:
+    directories:
+        - node_modules
 env:
   matrix:
    - NODE_ENV=development
