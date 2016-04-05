@@ -4,24 +4,11 @@ var compression = require("compression");
 var favicon = require("serve-favicon");
 var cookieParser = require("cookie-parser");
 var bodyParser = require("body-parser");
-var mongoose = require("mongoose");
 var session = require("express-session");
 var RedisStore = require("connect-redis")(session);
 var url = require("url");
 var csrf = require("csurf");
 
-
-/**
- * Connect to the Database using mongoose. Throw an error if a 
- * connection error occurred.
- */
-var dbURL = process.env.MONGOLAB_URI || "mongodb://localhost/Drawing";
-var db = mongoose.connect(dbURL, function (err) {
-    if (err) {
-        console.error("Could not connect to the database");
-        throw err;
-    }
-});
 
 
 /**
@@ -42,12 +29,6 @@ if (process.env.REDISCLOUD_URL) {
  * pull in all of the routes
  */
 var routes = require("./routes");
-
-
-/**
- * Set up the port
- */
-var port = process.env.PORT || process.env.NODE_PORT || 3000;
 
 
 /**
@@ -92,10 +73,5 @@ app.use("/login", routes.login);
 app.get("*", function(req, res) {
     res.render("index");
 });
-app.listen(port, function(err) {
-   if (err) {
-       console.log("Could not connect to port " + port);
-       throw err;
-   }
-   console.log("listening on port " + port);
-});
+
+module.exports = app;
