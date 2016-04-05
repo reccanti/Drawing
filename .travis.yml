@@ -21,6 +21,9 @@ before_install:
   - npm install coveralls
   - npm install mocha
   - npm install chai
+  - npm install jsdom
+  - npm install supertest
+  
 script: npm run coverage
 after_success:
  - cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js
