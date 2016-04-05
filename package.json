@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "react + materialize drawing app",
   "main": "index.js",
+  "repository": "https://github.com/reccanti/Drawing",
   "scripts": {
     "pretest": "eslint ./**/*.js",
     "test": "mocha --require ./test/jsdomSetup.js --compilers js:babel-register --recursive ./test",
