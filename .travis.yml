@@ -14,8 +14,8 @@ env:
    - NODE_ENV=development
    - NODE_ENV=production
 before_install: 
-  - npm install jest-cli 
-  - npm install babel-jest 
+#   - npm install jest-cli 
+#   - npm install babel-jest 
   - npm install babel-preset-react 
   - npm install babel-register
   - npm install babel-preset-es2015 
