@@ -15,6 +15,7 @@ before_install:
   - npm install jest-cli 
   - npm install babel-jest 
   - npm install babel-preset-react 
+  - npm install babel-register
   - npm install babel-preset-es2015 
   - npm install react-addons-test-utils 
   - npm install istanbul
