@@ -21,6 +21,30 @@ describe("Static tests for the model", function() {
 
 
 describe("Tests the User model", function() {    
+    
+    
+    beforeEach(function(done) {
+        function clearDB() {
+            for (var i in mongoose.connection.collections) {
+                mongoose.connection.collections[i].remove(function() { });
+            }
+            return done();
+        }
+
+
+        if (mongoose.connection.readyState === 0) {
+            mongoose.connect(config.db.test, function(err) {
+                if (err) {
+                    throw err;
+                }
+                return clearDB();
+            });
+        } else {
+            return clearDB();
+        }
+    });
+    
+    
     it("Saves a User with the correct information", function(done) {
         var password = "test password";
         UserModel.Model.generateHash(password, function(salt, hash) {
@@ -32,7 +56,30 @@ describe("Tests the User model", function() {
             };
             var testUser = new UserModel.Model(userData);
             testUser.save(done);
-            done();
         });
     });
+    
+    
+    it("Correctly validates a password", function(done) {
+        var password = "test password";
+        UserModel.Model.generateHash(password, function(salt, hash) {
+            var userData = {
+                username: "testUser",
+                name: "user1",
+                password: hash,
+                salt: salt
+            };
+            var testUser = new UserModel.Model(userData);
+            testUser.save(
+                testUser.validatePassword(password, function(res) {
+                    chai.expect(res).to.be.true;
+                    done();
+                })
+            );
+        });
+        
+    });
+    
+    
+    
 });
