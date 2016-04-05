@@ -17,6 +17,7 @@ before_install:
   - npm install babel-preset-react 
   - npm install babel-preset-es2015 
   - npm install react-addons-test-utils 
+  - npm install istanbul
   - npm install coveralls
   - npm install mocha
   - npm install chai
