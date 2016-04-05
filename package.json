@@ -4,6 +4,7 @@
   "description": "react + materialize drawing app",
   "main": "index.js",
   "scripts": {
+    "pretest": "eslint ./**/*.js",
     "test": "mocha --require ./test/jsdomSetup.js --compilers js:babel-register --recursive ./test",
     "buildReact": "gulp react",
     "coverage": "DEBUG=false istanbul cover _mocha --  --require ./test/jsdomSetup.js --compilers js:babel-register --recursive ./test",
@@ -48,6 +49,9 @@
     "babel-register": "^6.7.2",
     "chai": "^3.5.0",
     "coveralls": "^2.11.9",
+    "eslint": "^2.7.0",
+    "eslint-config-airbnb": "^6.2.0",
+    "eslint-plugin-react": "^4.2.3",
     "gulp-clean": "^0.3.2",
     "istanbul": "^0.4.2",
     "jasmine-node": "^1.14.5",
