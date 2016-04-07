@@ -8,6 +8,14 @@ var LoginForm = React.createClass({
     
     
     /**
+     * Validate PropTypes
+     */
+    propTypes: {
+        login: React.PropTypes.func.isRequired
+    },
+    
+    
+    /**
      * Store the value of the username input in the component's
      * state
      */
@@ -44,12 +52,12 @@ var LoginForm = React.createClass({
      */
     render: function() {
         return (
-            <form action="/login" method="POST" onSubmit={this.submitForm}>
+            <form action="/login" method="POST" ref="form" onSubmit={this.submitForm}>
                 <label htmlFor="username">Username</label>
-                <input type="text" name="username" onChange={this.setUsername} />
+                <input type="text" name="username" ref="username" onChange={this.setUsername} />
                 <label htmlFor="password">Password</label>
-                <input type="text" name="password" onChange={this.setPassword} />
-                <button type="submit">Submit</button>
+                <input type="text" name="password" ref="password" onChange={this.setPassword} />
+                <button type="submit" ref="submit" >Submit</button>
                 
                 <Link to="/signup">Sign up for an account</Link>
                 <Link to="/">Return to Home</Link>
