@@ -10,7 +10,8 @@
     "buildReact": "gulp react",
     "coverage": "DEBUG=false istanbul cover _mocha --  --require ./test/jsdomSetup.js --compilers js:babel-register --recursive ./test",
     "start": "gulp react && node ./bin/www",
-    "debug": "gulp react && DEBUG=express:* node ./bin/www"
+    "debug": "gulp react && DEBUG=express:* node ./bin/www",
+    "watch": "gulp watch-react"
   },
   "author": "Ben Wilcox",
   "license": "MIT",
@@ -27,6 +28,7 @@
     "gulp-sass": "^2.2.0",
     "gulp-streamify": "^1.0.2",
     "gulp-uglify": "^1.5.3",
+    "gulp-util": "^3.0.7",
     "jade": "^1.11.0",
     "jquery": "^2.2.2",
     "lodash": "^4.6.1",
@@ -40,6 +42,7 @@
     "redux-thunk": "^2.0.1",
     "serve-favicon": "^2.3.0",
     "socket.io": "^1.4.5",
+    "vinyl-buffer": "^1.0.0",
     "vinyl-source-stream": "^1.1.0",
     "whatwg-fetch": "^0.11.0"
   },

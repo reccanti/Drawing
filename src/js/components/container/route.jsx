@@ -99,6 +99,8 @@ fetch("/session/login", {
         renderApp();
     });;
 
+console.log("Hello gasldjfa");
+
 
 /**
  * Set up the Routes for the React app
