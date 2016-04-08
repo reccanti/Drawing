@@ -4,28 +4,33 @@ var ReactDOM = require('react-dom');
 var ReactRouter = require('react-router');
 var Router = ReactRouter.Router;
 var Route = ReactRouter.Route;
-var Link = ReactRouter.Link;
 var browserHistory = ReactRouter.browserHistory;
-var Provider = require("react-redux").Provider;
+var Provider = require('react-redux').Provider;
 
-var store = require("../../stores/reduxStore.js");
+var store = require('../../stores/reduxStore.js');
 
-var SignupLayout = require("./signup.jsx");
-var LoginLayout = require("./login.jsx");
-var AppLayout = require("./app.jsx");
+var SignupLayout = require('./signup.jsx');
+var LoginLayout = require('./login.jsx');
+var AppLayout = require('./app.jsx');
 
-require("whatwg-fetch");
+var requiresLogin;
+var requiresLogout;
+var checkStatus;
+var parseJSON;
+var login;
+var renderApp;
 
+require('whatwg-fetch');
 
 /**
  * This function requires the user to be logged into the
  * system. If not, they will be redirected to the login
- * page. 
+ * page.
  */
-var requiresLogin = function(nextState, replace) {
+requiresLogin = function (nextState, replace) {
     if (!store.getState().loginState.username) {
         replace({
-            pathname: "/login"
+            pathname: '/login',
         });
     }
 };
@@ -36,33 +41,33 @@ var requiresLogin = function(nextState, replace) {
  * the system. If they are not logged out, they will be
  * redirected to the root page.
  */
-var requiresLogout = function(nextState, replace) {
+requiresLogout = function (nextState, replace) {
     if (store.getState().loginState.username) {
         replace({
-            pathname: "/"
+            pathname: '/',
         });
     }
-}
+};
 
 
 /**
  * Check the status of a fetch request and ensure it is valid
  */
-var checkStatus = function(res) {
+checkStatus = function (res) {
+    var error;
     if (res.status >= 200 && res.status < 300) {
         return res;
-    } else {
-        var error = new Error(res.error);
-        error.response = res;
-        throw error;
     }
+    error = new Error(res.error);
+    error.response = res;
+    throw error;
 };
 
 
 /**
  * Parse the JSON response from the request
  */
-var parseJSON = function(res) {
+parseJSON = function (res) {
     return res.json();
 };
 
@@ -70,42 +75,19 @@ var parseJSON = function(res) {
 /**
  * Get the login information of the User
  */
-var login = function(res) {
+login = function (res) {
     store.dispatch({
-        type: "LOGIN_SUCCESS",
-        results: res
+        type: 'LOGIN_SUCCESS',
+        results: res,
     });
     renderApp();
 };
-    
- 
- /**
-  * Check for a session, and if it exists, store 
-  * the logged in information.
-  */
-fetch("/session/login", {
-     method: "POST",
-     credentials: "include"
- })
-    .then(checkStatus)
-    .then(parseJSON)
-    .then(login)
-    .catch(function(err) {
-        var errormsg = err.response;
-        store.dispatch({
-            type: "LOGIN_FAILURE",
-            error: errormsg
-        });
-        renderApp();
-    });;
-
-console.log("Hello gasldjfa");
 
 
 /**
  * Set up the Routes for the React app
  */
-var renderApp = function() { 
+renderApp = function () {
     ReactDOM.render(
         <Provider store={store}>
             <Router history={browserHistory} >
@@ -114,6 +96,27 @@ var renderApp = function() {
                 <Route path="/login" component={LoginLayout} onEnter={requiresLogout} />
             </Router>
         </Provider>,
-        document.getElementById("container")
+        document.getElementById('container')
     );
-}
+};
+
+
+ /**
+  * Check for a session, and if it exists, store
+  * the logged in information.
+  */
+fetch('/session/login', {
+    method: 'POST',
+    credentials: 'include',
+})
+    .then(checkStatus)
+    .then(parseJSON)
+    .then(login)
+    .catch(function (err) {
+        var errormsg = err.response;
+        store.dispatch({
+            type: 'LOGIN_FAILURE',
+            error: errormsg,
+        });
+        renderApp();
+    });

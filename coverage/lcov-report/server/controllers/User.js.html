@@ -16,7 +16,7 @@
 <div class='wrapper'>
   <div class='pad1'>
     <h1>
-      <a href="../../index.html">all files</a> / <a href="index.html">server/controllers/</a> User.js
+      <a href="../../index.html">All files</a> / <a href="index.html">server/controllers</a> User.js
     </h1>
     <div class='clearfix'>
       <div class='fl pad1y space-right2'>
@@ -108,8 +108,8 @@
 63
 64
 65
-66</td><td class="line-coverage quiet"><span class="cline-any cline-yes">1×</span>
-<span class="cline-any cline-yes">1×</span>
+66</td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -119,7 +119,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -142,7 +142,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -172,8 +172,8 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1×</span>
-<span class="cline-any cline-yes">1×</span></td><td class="text"><pre class="prettyprint lang-js">var models = require("../models");
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span></td><td class="text"><pre class="prettyprint lang-js">var models = require("../models");
 var User = models.User;
 &nbsp;
 &nbsp;
@@ -185,11 +185,11 @@ var User = models.User;
  * authenticates correctly, it redirects to the account.
  */
 var login = <span class="fstat-no" title="function not covered" >function(req, res) {</span>
-<span class="cstat-no" title="statement not covered" >    if (!req.body.username || !req.body.password) {</span>
+<span class="cstat-no" title="statement not covered" ></span>    if (!req.body.username || !req.body.password) {
 <span class="cstat-no" title="statement not covered" >        res.status(400).json({error: "All fields are required"});</span>
     }
 <span class="cstat-no" title="statement not covered" >    User.Model.authenticate(req.body.username, req.body.password, <span class="fstat-no" title="function not covered" >function(err, account) {</span></span>
-<span class="cstat-no" title="statement not covered" >        if (err || !account) {</span>
+<span class="cstat-no" title="statement not covered" ></span>        if (err || !account) {
 <span class="cstat-no" title="statement not covered" >            return res.status(401).json({error: "wrong username"});</span>
         }
 <span class="cstat-no" title="statement not covered" >        req.session.account = account.toAPI();</span>
@@ -208,13 +208,13 @@ var login = <span class="fstat-no" title="function not covered" >function(req, r
  * saves it into the database
  */
 var signup = <span class="fstat-no" title="function not covered" >function(req, res) {</span>
-<span class="cstat-no" title="statement not covered" >    if (!req.body.username ||</span>
+<span class="cstat-no" title="statement not covered" ></span>    if (!req.body.username ||
         !req.body.name ||
         !req.body.password ||
         !req.body.password_conf) {
 <span class="cstat-no" title="statement not covered" >        return res.status(400).json({error: "All fields are required"});</span>
     }
-<span class="cstat-no" title="statement not covered" >    if (req.body.password !== req.body.password_conf) {</span>
+<span class="cstat-no" title="statement not covered" ></span>    if (req.body.password !== req.body.password_conf) {
 <span class="cstat-no" title="statement not covered" >        return res.status(400).json({error: "passwords don't match"});</span>
     }
 <span class="cstat-no" title="statement not covered" >    User.Model.generateHash(req.body.password, <span class="fstat-no" title="function not covered" >function(salt, hash) {</span></span>
@@ -226,7 +226,7 @@ var signup = <span class="fstat-no" title="function not covered" >function(req, 
         };
 <span class="cstat-no" title="statement not covered" >        var newUser = new User.Model(userData);</span>
 <span class="cstat-no" title="statement not covered" >        newUser.save(<span class="fstat-no" title="function not covered" >function(err) {</span></span>
-<span class="cstat-no" title="statement not covered" >            if (err) {</span>
+<span class="cstat-no" title="statement not covered" ></span>            if (err) {
 <span class="cstat-no" title="statement not covered" >                console.error(err);</span>
 <span class="cstat-no" title="statement not covered" >                return res.status(400).json({error: "an error occurred when saving your account to the database"});</span>
             }
@@ -244,7 +244,7 @@ module.exports.login = login;</pre></td></tr>
 </div><!-- /wrapper -->
 <div class='footer quiet pad2 space-top1 center small'>
   Code coverage
-  generated by <a href="http://istanbul-js.org/" target="_blank">istanbul</a> at Tue Apr 05 2016 12:34:52 GMT-0400 (EDT)
+  generated by <a href="http://istanbul-js.org/" target="_blank">istanbul</a> at Thu Apr 07 2016 18:50:40 GMT-0400 (EDT)
 </div>
 </div>
 <script src="../../prettify.js"></script>

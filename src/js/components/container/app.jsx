@@ -1,50 +1,76 @@
-var React = require("react");
-var store = require("../../stores/reduxStore.js");
-var connect = require("react-redux").connect;
+var React = require('react');
+var store = require('../../stores/reduxStore.js');
+var connect = require('react-redux').connect;
 
-var Router = require("react-router");
+var Router = require('react-router');
 var Link = Router.Link;
 var browserHistory = Router.browserHistory;
 
-require("whatwg-fetch");
+var Overlay = require('./overlay.jsx');
+
+var AppLayout;
+var component;
+
+require('whatwg-fetch');
 
 
 /**
- * This is mostly for testing right now. The app will 
+ * This is mostly for testing right now. The app will
  * render a username taken from the store.
  */
-var AppLayout = React.createClass({
-    _logout: function(e) {
+AppLayout = React.createClass({
+
+
+    /**
+     * Validate props
+     */
+    propTypes: {
+        username: React.PropTypes.string,
+    },
+
+
+    /**
+     * Logs the user out of the system
+     */
+    _logout: function (e) {
         e.preventDefault();
-        fetch("/session/logout", {
-            method: "POST",
-            credentials: "include"
+        fetch('/session/logout', {
+            method: 'POST',
+            credentials: 'include',
         })
-            .then(function(res) {
+            .then(function () {
                 store.dispatch({
-                    type: "LOGOUT"
+                    type: 'LOGOUT',
                 });
-                browserHistory.push("/login");
+                browserHistory.push('/login');
             });
     },
-    render: function() {
+
+
+    /**
+     * Render the app screen
+     */
+    render: function () {
         return (
             <div>
+                <Overlay>
+                    <div>Test Div</div>
+                </Overlay>
                 <p>{this.props.username}</p>
                 <Link to="/login" onClick={this._logout}>Log out</Link>
             </div>
         );
-    } 
+    },
 });
 
 
 /**
- * This component connects the AppLayout with the store, 
+ * This component connects the AppLayout with the store,
  * assigning the username as a prop
  */
-var component = connect(function(store) {
+component = connect(function (connectStore) {
     return {
-        username: store.loginState.username
+        username: connectStore.loginState.username,
     };
 })(AppLayout);
 

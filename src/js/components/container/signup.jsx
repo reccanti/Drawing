@@ -1,11 +1,13 @@
-var React = require("react");
+var React = require('react');
 
-var store = require("../../stores/reduxStore.js");
-var connect = require("react-redux").connect;
+var store = require('../../stores/reduxStore.js');
+var connect = require('react-redux').connect;
 var browserHistory = require('react-router').browserHistory;
 var $ = require('jquery');
 
-var SignupForm = require("../presentation/signupForm.jsx");
+var SignupForm = require('../presentation/signupForm.jsx');
+
+var component;
 
 
 /**
@@ -13,49 +15,50 @@ var SignupForm = require("../presentation/signupForm.jsx");
  * handles AJAX submissions
  */
 var SignupLayout = React.createClass({
-    
+
+
     /**
-     * Given a set of data, submit it to the server using 
+     * Given a set of data, submit it to the server using
      * AJAX and authenticate it. Perform any store functions
      * afterwards
      */
-    signup: function(data) {
+    signup: function (data) {
         store.dispatch({
-            type: "LOGIN_WAITING"
+            type: 'LOGIN_WAITING',
         });
-        
+
         // perform ajax
         $.ajax({
             cache: false,
-            type: "POST",
-            url: "/signup",
+            type: 'POST',
+            url: '/signup',
             data: data,
-            dataType: "json",
-            success: function(result, status, xhr) {
+            dataType: 'json',
+            success: function (result) {
                 store.dispatch({
-                    type: "LOGIN_SUCCESS",
-                    results: result
+                    type: 'LOGIN_SUCCESS',
+                    results: result,
                 });
-                browserHistory.push("/"); // redirect to root after signup
+                browserHistory.push('/'); // redirect to root after signup
             },
-            error: function(xhr, status, error) {
+            error: function (xhr) {
                 var errormsg = JSON.parse(xhr.responseText);
                 store.dispatch({
-                    type: "LOGIN_FAILURE",
-                    error: errormsg
+                    type: 'LOGIN_FAILURE',
+                    error: errormsg,
                 });
-            }
+            },
         });
     },
-    
+
     /**
      * Renders the Signup Form
      */
-    render: function() {
+    render: function () {
         return (
             <SignupForm signup={this.signup} />
         );
-    } 
+    },
 });
 
 
@@ -63,7 +66,7 @@ var SignupLayout = React.createClass({
  * This function maps store values to the form
  * properties
  */
-function mapToProps(store) {
+function mapToProps() {
     return {};
 }
 
@@ -72,5 +75,5 @@ function mapToProps(store) {
  * Create a component that connects the store with the
  * layout and export it.
  */
-var component = connect(mapToProps)(SignupLayout);
+component = connect(mapToProps)(SignupLayout);
 module.exports = component;

@@ -5,7 +5,7 @@
   "main": "index.js",
   "repository": "https://github.com/reccanti/Drawing",
   "scripts": {
-    "pretest": "eslint ./**/*.js",
+    "pretest": "eslint src/**/*.js src/**/*.jsx test/**/*.js",
     "test": "mocha --require ./test/jsdomSetup.js --compilers js:babel-register --recursive ./test",
     "buildReact": "gulp react",
     "coverage": "DEBUG=false istanbul cover _mocha --  --require ./test/jsdomSetup.js --compilers js:babel-register --recursive ./test",
@@ -57,7 +57,7 @@
     "eslint-config-airbnb": "^6.2.0",
     "eslint-plugin-react": "^4.2.3",
     "gulp-clean": "^0.3.2",
-    "istanbul": "^0.4.2",
+    "istanbul": "^1.0.0-alpha.2",
     "jasmine-node": "^1.14.5",
     "jest-cli": "^0.9.2",
     "jsdom": "^8.3.0",

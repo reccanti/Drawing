@@ -1,8 +1,12 @@
-var Redux = require("redux");
-var thunk = require("redux-thunk").default;
-var reducers = require("./reducers");
-var _ = require("lodash");
-require("whatwg-fetch");
+var Redux = require('redux');
+var thunk = require('redux-thunk').default;
+var reducers = require('./reducers');
+
+var combinedReducers;
+var devTools;
+var DrawingStore;
+
+require('whatwg-fetch');
 
 // $.ajax({
 //     cache: false,
@@ -39,10 +43,6 @@ require("whatwg-fetch");
 //     });
 
 
-var initialState = {
-};
-
-
 /**
  * This records the session info of the User
  */
@@ -53,28 +53,29 @@ var initialState = {
 //     if (action.type === "USER_LOGIN") {
 //         var newState = _.assign({}, state, {
 //             username: action.username
-//         });  
+//         });
 //         console.log(newState);
 //         return newState;
 //     }
-//     return state;    
+//     return state;
 // };
 
 
+devTools = window.devToolsExtension ?
+    window.devToolsExtension() :
+    function (f) {
+        return f;
+    };
 /**
  * This creates the store from the reducers
  */
-var reducers = Redux.combineReducers({
-    loginState: reducers.Login
+combinedReducers = Redux.combineReducers({
+    loginState: reducers.Login,
 });
-var DrawingStore = Redux.createStore(
-    reducers,
+DrawingStore = Redux.createStore(
+    combinedReducers,
     Redux.compose(
         Redux.applyMiddleware(thunk),
-        window.devToolsExtension())); // so we can use the dev tools
-        
-        
+        devTools)); // so we can use the dev tools
 
-        
-    
 module.exports = DrawingStore;
