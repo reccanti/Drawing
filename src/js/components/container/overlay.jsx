@@ -17,6 +17,13 @@ var Overlay = React.createClass({
 
     propTypes: {
         children: React.PropTypes.object,
+        close: React.PropTypes.func,
+    },
+
+
+    closeOverlay: function (e) {
+        e.preventDefault();
+        this.props.close();
     },
 
 
@@ -26,7 +33,13 @@ var Overlay = React.createClass({
     render: function renderComponent() {
         return (
             <div className="overlay">
-                Overlay stuff will go in here
+                <a
+                  ref="closeButton"
+                  className="overlay_closeButton"
+                  onClick={this.closeOverlay}
+                >
+                X
+                </a>
                 {this.props.children}
             </div>
         );

@@ -7,6 +7,7 @@ var Link = Router.Link;
 var browserHistory = Router.browserHistory;
 
 var Overlay = require('./overlay.jsx');
+var DrawingCanvas = require('../presentation/canvas.jsx');
 
 var AppLayout;
 var component;
@@ -18,6 +19,7 @@ require('whatwg-fetch');
  * This is mostly for testing right now. The app will
  * render a username taken from the store.
  */
+/* eslint quote-props: 0 */
 AppLayout = React.createClass({
 
 
@@ -26,6 +28,16 @@ AppLayout = React.createClass({
      */
     propTypes: {
         username: React.PropTypes.string,
+    },
+
+
+    /**
+     * Set the initial state of the movie
+     */
+    getInitialState: function () {
+        return {
+            overlay: true,
+        };
     },
 
 
@@ -48,14 +60,29 @@ AppLayout = React.createClass({
 
 
     /**
+     * This function will set the state of the app and tell it whether
+     * or not to display the overlay
+     */
+    _closeOverlay: function () {
+        this.setState({ 'overlay': false });
+    },
+
+
+    /**
      * Render the app screen
      */
     render: function () {
+        var overlay = undefined;
+        if (this.state.overlay) {
+            overlay = (
+                <Overlay close={this._closeOverlay}>
+                    <DrawingCanvas width={450} height={450} />
+                </Overlay>
+            );
+        }
         return (
             <div>
-                <Overlay>
-                    <div>Test Div</div>
-                </Overlay>
+                {overlay}
                 <p>{this.props.username}</p>
                 <Link to="/login" onClick={this._logout}>Log out</Link>
             </div>

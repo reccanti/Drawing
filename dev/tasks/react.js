@@ -41,7 +41,7 @@ var browserifyTask = function(src, dest, watch) {
             .on('error', gutil.log.bind(gutil, 'Browserify Error'))
             .pipe(source(dest))
             .pipe(buffer())
-            .pipe(uglify())
+            // .pipe(uglify())
             .pipe(gulp.dest('.'));
     };
     bundler.on('update', rebundle);
