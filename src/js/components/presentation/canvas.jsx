@@ -252,6 +252,16 @@ var DrawingCanvas = React.createClass({
 
 
     /**
+     * Handle the event when the card submit button is
+     * pressed
+     */
+    onCardSubmit: function (e) {
+        e.preventDefault();
+        this._exportCanvas(this.state.canvas);
+    },
+
+
+    /**
      * This function gets the mouse position on the canvas
      */
     _getMouseOnCanvas: function (e) {
@@ -275,6 +285,15 @@ var DrawingCanvas = React.createClass({
 
 
     /**
+     * Exports the canvas as an image
+     */
+    _exportCanvas(canvas) {
+        var image = canvas.toDataURL('image/png');
+        console.log(image);
+    },
+
+
+    /**
      * Render the Canvas
      */
     render: function () {
@@ -287,6 +306,9 @@ var DrawingCanvas = React.createClass({
                   height={this.props.height}
                 >
                 </canvas>
+                <div className="card-action">
+                    <a href="#" onClick={this.onCardSubmit}>This is a link</a>
+                </div>
             </div>
         );
     },
