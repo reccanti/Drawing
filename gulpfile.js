@@ -8,7 +8,7 @@ reactTask = react(["src/js/components/container/route.jsx"], "dist/js/components
 // styles
 // var sassTask = require("./dev/tasks/sass");
 var sass = require('./dev/tasks/sass');
-sassTask = sass('src/sass/main.scss', 'dist/css/main.scss');
+sassTask = sass('src/sass/main.scss', 'dist/css');
 
 // scripts
 gulp.task("watch-sass", [], function() {
@@ -18,8 +18,12 @@ gulp.task("watch-sass", [], function() {
         });
 });
 
+gulp.task('fonts', [], function() {
+    return gulp.src(['src/fonts/**/*.*'])
+        .pipe(gulp.dest('dist/fonts'));
+});
 
 gulp.task("watch-react", [], reactTask);
-gulp.task('watch', ['watch-sass', 'watch-react']);
+gulp.task('watch', ['watch-sass', 'watch-react', 'fonts']);
 
 gulp.task("default", ["sass"]);
