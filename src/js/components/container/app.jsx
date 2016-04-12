@@ -8,6 +8,7 @@ var browserHistory = Router.browserHistory;
 
 var Overlay = require('./overlay.jsx');
 var CanvasContainer = require('./canvasContainer.jsx');
+var Timeline = require('./Timeline.jsx');
 // var DrawingCanvas = require('../presentation/canvas.jsx');
 
 var AppLayout;
@@ -38,7 +39,29 @@ AppLayout = React.createClass({
     getInitialState: function () {
         return {
             overlay: true,
+            dataURLs: [],
         };
+    },
+
+
+    componentDidMount: function () {
+        var _this = this;
+        fetch('/user/getImages', {
+            method: 'POST',
+            credentials: 'include',
+        })
+        .then(function (res) {
+            return res.json();
+        })
+        .then(function (res) {
+            var urls = [];
+            res.drawings.map(function (data) {
+                urls.push(data.image);
+                return 0;
+            });
+            _this.setState({ 'dataURLs': urls });
+            return 0;
+        });
     },
 
 
@@ -83,9 +106,12 @@ AppLayout = React.createClass({
         }
         return (
             <div>
+                <div className="Main">
+                    <p>{this.props.username}</p>
+                    <Timeline dataURLs={this.state.dataURLs} />
+                    <Link to="/login" onClick={this._logout}>Log out</Link>
+                </div>
                 {overlay}
-                <p>{this.props.username}</p>
-                <Link to="/login" onClick={this._logout}>Log out</Link>
             </div>
         );
     },

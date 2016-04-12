@@ -31,10 +31,14 @@ var saveImage = function (req, res) {
 };
 
 
+/**
+ * Gets all of the images from the User
+ */
 var getImages = function (req, res) {
     Drawing.Model.findByOwner(req.session.account._id, function (err, accounts) {
         var images = [];
-        for (var i = 0; i < accounts.length; i++) {
+        var i;
+        for (i = 0; i < accounts.length; i++) {
             images.push(accounts[i].toAPI());
         }
         res.status(200).json({
