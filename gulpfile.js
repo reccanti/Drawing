@@ -3,7 +3,8 @@ var gutil = require('gulp-util');
 
 // define the react task
 var react = require("./dev/tasks/react");
-reactTask = react(["src/js/components/container/route.jsx"], "dist/js/componentsbundle.js", true);
+var reactTaskWatch = react(["src/js/components/container/route.jsx"], "dist/js/componentsbundle.js", true);
+var reactTaskStatic = react(["src/js/components/container/route.jsx"], "dist/js/componentsbundle.js", false)
 
 // styles
 // var sassTask = require("./dev/tasks/sass");
@@ -23,7 +24,12 @@ gulp.task('fonts', [], function() {
         .pipe(gulp.dest('dist/fonts'));
 });
 
-gulp.task("watch-react", [], reactTask);
+
+gulp.task("watch-react", [], reactTaskWatch);
+gulp.task("react",[], reactTaskStatic);
+gulp.task('sass', [], sassTask);
+gulp.task('build', ['react', 'sass', 'fonts']);
+
 gulp.task('watch', ['watch-sass', 'watch-react', 'fonts']);
 
 gulp.task("default", ["sass"]);

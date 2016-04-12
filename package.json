@@ -9,7 +9,7 @@
     "test": "mocha --require ./test/jsdomSetup.js --compilers js:babel-register --recursive ./test",
     "buildReact": "gulp react",
     "coverage": "DEBUG=false istanbul cover _mocha --  --require ./test/jsdomSetup.js --compilers js:babel-register --recursive ./test",
-    "start": "node ./bin/www",
+    "start": "gulp build && node ./bin/www",
     "debug": "gulp react && DEBUG=express:* node ./bin/www",
     "watch": "gulp watch"
   },
