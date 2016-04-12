@@ -41,6 +41,22 @@ DrawingSchema.methods.toAPI = function () {
 };
 
 
+/**
+ * Given the ID of a User, find all of the images associated with
+ * that User
+ */
+DrawingSchema.statics.findByOwner = function (ownerId, callback) {
+    var search = {
+        owner: mongoose.Types.ObjectId(ownerId),
+    };
+    return DrawingModel
+        .find(search)
+        .sort({ createdDate: 1 })
+        .select('image owner createdDate')
+        .exec(callback);
+};
+
+
 DrawingModel = mongoose.model('Drawing', DrawingSchema);
 
 
