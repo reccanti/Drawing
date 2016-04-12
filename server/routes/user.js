@@ -13,8 +13,11 @@ router.post('/saveImage', function (req, res) {
     console.log(req.body);
     Drawing.saveImage(req, res);
 });
-/* eslint no-console: 0 */
-console.log(router);
+
+
+router.post('/getImages', function (req, res) {
+    Drawing.getImages(req, res);
+});
 
 
 module.exports = router;

@@ -23,16 +23,12 @@ CanvasContainer = React.createClass({
         var str = JSON.stringify(data);
         fetch('/user/saveImage', {
             method: 'POST',
-            credentials: 'include',  
+            credentials: 'include',
             headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json'
+                Accept: 'application/json',
+                'Content-Type': 'application/json',
             },
             body: str,
-        })
-        .catch(function (err) {
-            /* eslint no-console: 0 */
-            console.log(err.response);
         });
     },
 

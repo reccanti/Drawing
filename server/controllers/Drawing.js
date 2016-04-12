@@ -28,27 +28,20 @@ var saveImage = function (req, res) {
         }
         return res.status(200);
     });
-    // User.Model.generateHash(req.body.password, function (salt, hash) {
-    //     var userData = {
-    //         username: req.body.username,
-    //         name: req.body.name,
-    //         salt: salt,
-    //         password: hash,
-    //     };
-    //     var newUser = new User.Model(userData);
-    //     newUser.save(function (err) {
-    //         if (err) {
-    //             /* eslint no-console: 0 */
-    //             console.error(err);
-    //             return res.status(400).json({
-    //                 error: 'an error occurred when saving your account to the database',
-    //             });
-    //         }
-    //         req.session.account = newUser.toAPI();
-    //         res.status(200).json(newUser.toAPI());
-    //     });
-    // });
 };
 
 
+var getImages = function (req, res) {
+    Drawing.Model.findByOwner(req.session.account._id, function (err, accounts) {
+        var images = [];
+        for (var i = 0; i < accounts.length; i++) {
+            images.push(accounts[i].toAPI());
+        }
+        res.status(200).json({
+            drawings: images,
+        });
+    });
+};
+
 module.exports.saveImage = saveImage;
+module.exports.getImages = getImages;

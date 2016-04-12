@@ -49,6 +49,16 @@ var DrawingCanvas = React.createClass({
         });
 
 
+        fetch('/user/getImages', {
+            method: 'POST',
+            credentials: 'include',
+        })
+        .then(function (res) {
+            return res.json();
+        })
+        .then(function (res) {
+            console.log(res);
+        });
         canvas.addEventListener('mouseup', this.onMouseUp);
         canvas.addEventListener('mousedown', this.onMouseDown);
         canvas.addEventListener('mousemove', this.onMouseMove);
