@@ -49,6 +49,7 @@ app.use(compression());
 app.use(bodyParser.urlencoded({
     extended: true,
 }));
+app.use(bodyParser.json());
 app.use(session({
     key: 'sessionid',
     store: new RedisStore({
@@ -79,6 +80,7 @@ app.use(cookieParser());
 app.use('/session', routes.session);
 app.use('/signup', routes.signup);
 app.use('/login', routes.login);
+app.use('/user', routes.user);
 app.get('*', serveIndex);
 
 module.exports = app;

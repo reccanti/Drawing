@@ -9,12 +9,12 @@ var Drawing = models.Drawing;
 var saveImage = function (req, res) {
     var saveData;
     var drawing;
-    if (!req.body.owner ||
-        !req.body.dataURI) {
+    console.log(req.body);
+    if (!req.body.dataURI) {
         return res.status(400).json({ error: 'All fields are required' });
     }
     saveData = {
-        owner: req.body.owner,
+        owner: req.session.account._id,
         image: req.body.dataURI,
     };
     drawing = new Drawing.Model(saveData);

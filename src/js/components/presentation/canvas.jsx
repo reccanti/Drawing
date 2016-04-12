@@ -151,7 +151,7 @@ var DrawingCanvas = React.createClass({
             owner: this.props.owner,
         };
         /* eslint no-console: 0 */
-        console.log(image);
+        console.log(data);
         this.props.submit(data);
     },
 

@@ -8,9 +8,13 @@ var Drawing = require('../controllers').Drawing;
  * Go through the necessary steps to sign the user up for
  * an account.
  */
-router.post('/saveDrawing', function (req, res) {
-    Drawing.signup(req, res);
+router.post('/saveImage', function (req, res) {
+    /* eslint no-console: 0 */
+    console.log(req.body);
+    Drawing.saveImage(req, res);
 });
+/* eslint no-console: 0 */
+console.log(router);
 
 
 module.exports = router;
