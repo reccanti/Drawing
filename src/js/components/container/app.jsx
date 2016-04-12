@@ -7,7 +7,8 @@ var Link = Router.Link;
 var browserHistory = Router.browserHistory;
 
 var Overlay = require('./overlay.jsx');
-var DrawingCanvas = require('../presentation/canvas.jsx');
+var CanvasContainer = require('./canvasContainer.jsx');
+// var DrawingCanvas = require('../presentation/canvas.jsx');
 
 var AppLayout;
 var component;
@@ -76,7 +77,7 @@ AppLayout = React.createClass({
         if (this.state.overlay) {
             overlay = (
                 <Overlay close={this._closeOverlay}>
-                    <DrawingCanvas width={450} height={450} />
+                    <CanvasContainer />
                 </Overlay>
             );
         }
