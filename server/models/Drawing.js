@@ -1,32 +1,20 @@
 var mongoose = require('mongoose');
+var DrawingModel;
 
 /**
  * Define the User's schema. The fields are as
  * follows:
  *
- * @property {String} username - A string that the user will
- * use to log in. This is a reference to the user's unique
- * _id and can be changed
+ * @property {Buffer} image - a dataurl containing the image
+ * data
  *
- * @property {String} name - The name that the user will be
- * publicly displayed as. This will be easy to changed
- *
- * @property {String} password - A string that the user will
- * use to log into the system. It is encrypted
- *
- * @property {ObjectId} avatar - A reference to a drawing.
- * This drawing will be displayed with the user and will
- * represent that user
- *
- * @property {ObjectId[]} drawings - an array of drawings
- * that the User has created
- *
- * @property {ObjectId[]} friends - an array of friends
- * that the User has
+ * @property {ObjectId} owner - the person who created the
+ * drawing
  */
 var DrawingSchema = new mongoose.Schema({
     image: {
         type: Buffer,
+        contentType: 'image/png',
         required: true,
     },
     owner: {
@@ -41,4 +29,20 @@ var DrawingSchema = new mongoose.Schema({
 });
 
 
+/**
+ * Returns the information from the schema as a
+ * an object that can be more easily interacted with
+ */
+DrawingSchema.methods.toAPI = function () {
+    return {
+        image: this.image,
+        createdDate: this.createdDate,
+    };
+};
+
+
+DrawingModel = mongoose.model('Drawing', DrawingSchema);
+
+
 module.exports.Schema = DrawingSchema;
+module.exports.Model = DrawingModel;

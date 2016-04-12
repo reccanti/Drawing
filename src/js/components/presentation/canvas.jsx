@@ -289,6 +289,7 @@ var DrawingCanvas = React.createClass({
      */
     _exportCanvas(canvas) {
         var image = canvas.toDataURL('image/png');
+        /* eslint no-console: 0 */
         console.log(image);
     },
 
