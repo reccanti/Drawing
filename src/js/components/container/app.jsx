@@ -38,7 +38,7 @@ AppLayout = React.createClass({
      */
     getInitialState: function () {
         return {
-            overlay: true,
+            overlay: false,
             dataURLs: [],
         };
     },
@@ -84,11 +84,20 @@ AppLayout = React.createClass({
 
 
     /**
-     * This function will set the state of the app and tell it whether
-     * or not to display the overlay
+     * This function will set the state of the app and tell it not to
+     * display the overlay
      */
     _closeOverlay: function () {
         this.setState({ 'overlay': false });
+    },
+
+
+    /**
+     * This function will set the state of the app and tell it to
+     * display the overlay
+     */
+    _openOverlay: function () {
+        this.setState({ 'overlay': true });
     },
 
 
@@ -107,9 +116,12 @@ AppLayout = React.createClass({
         return (
             <div>
                 <div className="Main">
-                    <p>{this.props.username}</p>
+                    <div>
+                        <p>{this.props.username}</p>
+                        <button onClick={this._openOverlay}>New Drawing</button>
+                        <Link to="/login" onClick={this._logout}>Log out</Link>
+                    </div>
                     <Timeline dataURLs={this.state.dataURLs} />
-                    <Link to="/login" onClick={this._logout}>Log out</Link>
                 </div>
                 {overlay}
             </div>
