@@ -2,7 +2,7 @@ var path = require('path');
 var express = require('express');
 var app = express();
 var compression = require('compression');
-// var favicon = require('serve-favicon');
+var favicon = require('serve-favicon');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var session = require('express-session');
@@ -66,6 +66,7 @@ app.use(session({
 }));
 app.set('view engine', 'jade');
 app.set('views', path.resolve(__dirname + '/views'));
+app.use(favicon(path.resolve(__dirname + "/../dist/favicon.png")));
 app.disable('x-powered-by');
 app.use(cookieParser());
 // app.use(csrf());

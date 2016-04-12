@@ -24,12 +24,17 @@ gulp.task('fonts', [], function() {
         .pipe(gulp.dest('dist/fonts'));
 });
 
+gulp.task('favicon', [], function () {
+    return gulp.src(['src/favicon.png'])
+        .pipe(gulp.dest('dist/'));
+});
+
 
 gulp.task("watch-react", [], reactTaskWatch);
 gulp.task("react",[], reactTaskStatic);
 gulp.task('sass', [], sassTask);
-gulp.task('build', ['react', 'sass', 'fonts']);
+gulp.task('build', ['react', 'sass', 'fonts', 'favicon']);
 
-gulp.task('watch', ['watch-sass', 'watch-react', 'fonts']);
+gulp.task('watch', ['watch-sass', 'watch-react', 'fonts', 'favicon']);
 
 gulp.task("default", ["sass"]);
