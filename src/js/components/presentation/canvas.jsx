@@ -170,7 +170,7 @@ var DrawingCanvas = React.createClass({
                 >
                 </canvas>
                 <div className="card-action">
-                    <a href="#" onClick={this.onCardSubmit}>This is a link</a>
+                    <a href="#" onClick={this.onCardSubmit}>Submit</a>
                 </div>
             </div>
         );
