@@ -4,6 +4,7 @@ var DrawingCanvas = require('../presentation/canvas.jsx');
 var CanvasContainer;
 var component;
 var store = require('../../stores/reduxStore.js');
+var actions = require('../../stores/actions');
 require('whatwg-fetch');
 
 
@@ -29,9 +30,12 @@ CanvasContainer = React.createClass({
                 'Content-Type': 'application/json',
             },
             body: str,
+        })
+        .then(function (res) {
+            store.dispatch(actions.Overlay.Close()); // close the canvas afterwards
         });
     },
-
+    
 
     /**
      * Render the Login Form

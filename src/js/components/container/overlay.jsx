@@ -23,16 +23,24 @@ var Overlay = React.createClass({
 
     closeOverlay: function (e) {
         e.preventDefault();
+        e.stopPropagation();
         this.props.close();
     },
 
+    drawChildren: function(children) {
+        console.log(children);
+        var childrenWithProps = children.map(function (child) {
+            React.cloneElement(child, { "close": this.closeOverlay });
+        });
+        return <div>{children}</div>
+    },
 
     /**
      * Render the Login Form
      */
     render: function renderComponent() {
         return (
-            <div className="overlay" onClick={this.closeOverlay}>
+            <div className="overlay">
                 <a
                   ref="closeButton"
                   className="overlay_closeButton"

@@ -9,7 +9,6 @@ var Drawing = models.Drawing;
 var saveImage = function (req, res) {
     var saveData;
     var drawing;
-    console.log(req.body);
     if (!req.body.dataURI) {
         return res.status(400).json({ error: 'All fields are required' });
     }
@@ -26,7 +25,7 @@ var saveImage = function (req, res) {
                 error: 'an error occurred when saving your drawing to the database',
             });
         }
-        return res.status(200);
+        return res.status(200).json({});
     });
 };
 

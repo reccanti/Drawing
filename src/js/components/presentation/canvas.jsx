@@ -144,15 +144,20 @@ var DrawingCanvas = React.createClass({
     /**
      * Exports the canvas as an image
      */
-    _exportCanvas(canvas) {
+    _exportCanvas: function (canvas) {
         var image = canvas.toImage();
         var data = {
             dataURI: image,
             owner: this.props.owner,
         };
         /* eslint no-console: 0 */
-        console.log(data);
         this.props.submit(data);
+    },
+    
+    
+    preventBubbling: function (e) {
+        // e.cancelBubble = true;
+        // e.stopPropagation();
     },
 
 
@@ -167,6 +172,7 @@ var DrawingCanvas = React.createClass({
                   className="DrawingCanvas_canvas"
                   width={this.props.width}
                   height={this.props.height}
+                  onClick={this.preventBubbling}
                 >
                 </canvas>
                 <div className="card-action">

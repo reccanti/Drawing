@@ -30,6 +30,7 @@ AppLayout = React.createClass({
      */
     propTypes: {
         username: React.PropTypes.string,
+        displayOverlay: React.PropTypes.bool,
     },
 
 
@@ -88,7 +89,11 @@ AppLayout = React.createClass({
      * display the overlay
      */
     _closeOverlay: function () {
-        this.setState({ 'overlay': false });
+        // this.setState({ 'overlay': false });
+        store.dispatch({
+            type: 'OVERLAY_CLOSE',
+            open: false,
+        });
     },
 
 
@@ -97,7 +102,11 @@ AppLayout = React.createClass({
      * display the overlay
      */
     _openOverlay: function () {
-        this.setState({ 'overlay': true });
+        // this.setState({ 'overlay': true });
+        store.dispatch({
+            type: 'OVERLAY_OPEN',
+            open: true,
+        });
     },
 
 
@@ -106,7 +115,7 @@ AppLayout = React.createClass({
      */
     render: function () {
         var overlay = undefined;
-        if (this.state.overlay) {
+        if (this.props.displayOverlay) {
             overlay = (
                 <Overlay close={this._closeOverlay}>
                     <CanvasContainer />
@@ -137,6 +146,7 @@ AppLayout = React.createClass({
 component = connect(function (connectStore) {
     return {
         username: connectStore.loginState.username,
+        displayOverlay: connectStore.overlayState.open,
     };
 })(AppLayout);
 
