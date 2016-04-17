@@ -31,6 +31,9 @@ CanvasContainer = React.createClass({
             },
             body: str,
         })
+        .then(function () {
+            store.dispatch(actions.Timeline.Update());
+        })
         // TODO: AFTER THIS, TELL THE TIMELINE IT NEEDS TO BE UPDATED. MAKE A VARIABLE IN THE STORE
         .then(function () {
             store.dispatch(actions.Overlay.Close()); // close the canvas afterwards

@@ -12,10 +12,11 @@ var Timeline = React.createClass({
     },
 
 
-    displayImage: function (dataURL) {
+    displayImage: function (obj) {
+        var dataURL = obj.image;
         return (
             <li>
-                <DrawingImage dataURL={dataURL} />
+                <DrawingImage creator={""} dataURL={dataURL} />
             </li>
         );
     },
@@ -24,7 +25,7 @@ var Timeline = React.createClass({
     render: function () {
         return (
             <ul>
-                {this.props.dataURLs.map(this.displayImage)}
+                {this.props.images.map(this.displayImage)}
             </ul>
         );
     },

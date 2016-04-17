@@ -20,6 +20,7 @@ devTools = window.devToolsExtension ?
 combinedReducers = Redux.combineReducers({
     loginState: reducers.Login,
     overlayState: reducers.Overlay,
+    timelineState: reducers.Timeline,
 });
 DrawingStore = Redux.createStore(
     combinedReducers,

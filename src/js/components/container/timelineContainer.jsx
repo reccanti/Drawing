@@ -1,8 +1,9 @@
 var React = require('react');
 var connect = require('react-redux').connect;
-// var DrawingImage = require('../presentation/image.jsx');
+var actions = require('../../stores/actions');
+var Timeline = require('../presentation/timeline.jsx');
 var component;
-// var store = require('../../stores/reduxStore.js');
+var store = require('../../stores/reduxStore.js');
 
 
 /**
@@ -11,9 +12,12 @@ var component;
  */
 /* eslint react/prefer-stateless-function: 0 */
 var TimelineContainer = React.createClass({
+    componentDidMount: function () {
+        store.dispatch(actions.Timeline.Update());
+    },
     render: function () {
         return (
-            <div></div>
+            <Timeline images={this.props.images}/>
         );
     },
 });
@@ -22,8 +26,10 @@ var TimelineContainer = React.createClass({
  * This function maps store values to the form
  * properties
  */
-function mapToProps() {
-    return {};
+function mapToProps(connectStore) {
+    return {
+        images: connectStore.timelineState.images,
+    };
 }
 
 

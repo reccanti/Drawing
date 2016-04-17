@@ -8,7 +8,7 @@ var browserHistory = Router.browserHistory;
 
 var Overlay = require('./overlay.jsx');
 var CanvasContainer = require('./canvasContainer.jsx');
-var Timeline = require('./Timeline.jsx');
+var TimelineContainer = require('./timelineContainer.jsx');
 // var DrawingCanvas = require('../presentation/canvas.jsx');
 
 var AppLayout;
@@ -131,7 +131,7 @@ AppLayout = React.createClass({
                         <button onClick={this._openOverlay}>New Drawing</button>
                         <Link to="/login" onClick={this._logout}>Log out</Link>
                     </div>
-                    <Timeline dataURLs={this.state.dataURLs} />
+                    <TimelineContainer />
                 </div>
                 {overlay}
             </div>
