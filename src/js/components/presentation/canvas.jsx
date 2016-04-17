@@ -1,5 +1,6 @@
 var React = require('react');
 var ReactDOM = require('react-dom');
+var atrament = require('atrament');
 
 
 var DrawingCanvas = React.createClass({
@@ -41,16 +42,17 @@ var DrawingCanvas = React.createClass({
 
         // apply any initial canvas scale factors
         // var scale = this._getCanvasScaleFactor(canvas);
+        var atrcanvas = atrament(canvas, canvas.width, canvas.height);
 
         /* eslint react/no-did-mount-set-state: 0 */
         this.setState({
-            canvas: canvas,
+            canvas: atrcanvas,
             ctx: ctx,
         });
-        canvas.addEventListener('mouseup', this.onMouseUp);
-        canvas.addEventListener('mousedown', this.onMouseDown);
-        canvas.addEventListener('mousemove', this.onMouseMove);
-        window.addEventListener('resize', this.onResize);
+        // canvas.addEventListener('mouseup', this.onMouseUp);
+        // canvas.addEventListener('mousedown', this.onMouseDown);
+        // canvas.addEventListener('mousemove', this.onMouseMove);
+        // window.addEventListener('resize', this.onResize);
     },
 
 
@@ -143,7 +145,7 @@ var DrawingCanvas = React.createClass({
      * Exports the canvas as an image
      */
     _exportCanvas(canvas) {
-        var image = canvas.toDataURL('image/png');
+        var image = canvas.toImage();
         var data = {
             dataURI: image,
             owner: this.props.owner,

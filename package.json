@@ -16,6 +16,7 @@
   "author": "Ben Wilcox",
   "license": "MIT",
   "dependencies": {
+    "atrament": "github:reccanti/atrament.js",
     "body-parser": "^1.15.0",
     "browserify": "^13.0.0",
     "compression": "^1.6.1",
