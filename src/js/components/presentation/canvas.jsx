@@ -153,11 +153,12 @@ var DrawingCanvas = React.createClass({
         /* eslint no-console: 0 */
         this.props.submit(data);
     },
-    
-    
+
+
     preventBubbling: function (e) {
-        // e.cancelBubble = true;
-        // e.stopPropagation();
+        /* eslint no-param-reassign: 0 */
+        e.cancelBubble = true;
+        e.stopPropagation();
     },
 
 
@@ -166,7 +167,7 @@ var DrawingCanvas = React.createClass({
      */
     render: function () {
         return (
-            <div className="DrawingCanvas card">
+            <div className="DrawingCanvas card" onClick={this.preventBubbling}>
                 <canvas
                   ref="canvas"
                   className="DrawingCanvas_canvas"

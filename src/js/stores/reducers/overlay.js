@@ -1,7 +1,7 @@
 var _ = require('lodash');
 
 /**
- * This handles whether or not the reducer should be
+ * This handles whether or not the overlay should be
  * displayed
  */
 var OverlayReducer = function (state, action) {

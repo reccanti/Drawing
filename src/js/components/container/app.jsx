@@ -45,6 +45,7 @@ AppLayout = React.createClass({
     },
 
 
+    // TODO MOVE THIS INTO THE TIMELINE
     componentDidMount: function () {
         var _this = this;
         fetch('/user/getImages', {

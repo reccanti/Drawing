@@ -1,7 +1,14 @@
 var React = require('react');
 var DrawingImage = require('../presentation/image.jsx');
+var component;
+var store = require('../../stores/reduxStore.js');
 
-var Timeline = React.createClass({
+
+/**
+ * This class waits for image updates, fetches them, and
+ * displays the appropriate images
+ */
+var TimelineContainer = React.createClass({
     propTypes: {
         dataURLs: React.PropTypes.array,
     },
