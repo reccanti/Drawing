@@ -18,6 +18,7 @@ var Overlay = React.createClass({
     propTypes: {
         children: React.PropTypes.object,
         close: React.PropTypes.func,
+        open: React.PropTypes.func,
     },
 
 

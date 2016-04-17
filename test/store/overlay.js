@@ -1,15 +1,15 @@
-var Overlay = require('../../src/js/store/actions').Overlay;
+var Overlay = require('../../src/js/stores/actions').Overlay;
 var chai = require('chai');
 
-describe('Test that we can get the app', function () {
+describe('Test that the overlay action creators work', function () {
     it('returns a closed overlay state', function (done) {
-        var state = Overlay.close();
+        var state = Overlay.Close();
         chai.expect(state.type).to.eql('OVERLAY_CLOSE');
         chai.expect(state.open).to.be.false;
         done();
     });
     it('returns an open overlay state', function (done) {
-        var state = Overlay.open();
+        var state = Overlay.Open();
         chai.expect(state.type).to.eql('OVERLAY_OPEN');
         chai.expect(state.open).to.be.true;
         done();

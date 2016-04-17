@@ -1,35 +1,35 @@
 var React = require('react');
-var DrawingImage = require('../presentation/image.jsx');
+var connect = require('react-redux').connect;
+// var DrawingImage = require('../presentation/image.jsx');
 var component;
-var store = require('../../stores/reduxStore.js');
+// var store = require('../../stores/reduxStore.js');
 
 
 /**
  * This class waits for image updates, fetches them, and
  * displays the appropriate images
  */
+/* eslint react/prefer-stateless-function: 0 */
 var TimelineContainer = React.createClass({
-    propTypes: {
-        dataURLs: React.PropTypes.array,
-    },
-
-
-    displayImage: function (dataURL) {
-        return (
-            <li>
-                <DrawingImage dataURL={dataURL} />
-            </li>
-        );
-    },
-
-
     render: function () {
         return (
-            <ul>
-                {this.props.dataURLs.map(this.displayImage)}
-            </ul>
+            <div></div>
         );
     },
 });
 
-module.exports = Timeline;
+/**
+ * This function maps store values to the form
+ * properties
+ */
+function mapToProps() {
+    return {};
+}
+
+
+/**
+ * Create a component that connects the store with the
+ * layout and export it.
+ */
+component = connect(mapToProps)(TimelineContainer);
+module.exports = component;

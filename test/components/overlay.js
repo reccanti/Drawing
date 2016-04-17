@@ -30,7 +30,7 @@ describe('test the Overlay component', function () {
     });
 
 
-    it('can find the LoginForm and components', function () {
+    it('can find the Overlay and components', function () {
         chai.expect(this.renderedComponent).not.to.be.undefined;
         chai.expect(this.overlay).not.to.be.undefined;
         chai.expect(this.closeButton).not.to.be.undefined;

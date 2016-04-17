@@ -118,7 +118,7 @@ AppLayout = React.createClass({
         var overlay = undefined;
         if (this.props.displayOverlay) {
             overlay = (
-                <Overlay close={this._closeOverlay}>
+                <Overlay close={this._closeOverlay} open={this._openOverlay}>
                     <CanvasContainer />
                 </Overlay>
             );
