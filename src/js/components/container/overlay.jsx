@@ -32,7 +32,7 @@ var Overlay = React.createClass({
      */
     render: function renderComponent() {
         return (
-            <div className="overlay">
+            <div className="overlay" onClick={this.closeOverlay}>
                 <a
                   ref="closeButton"
                   className="overlay_closeButton"
