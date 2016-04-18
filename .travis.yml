@@ -10,16 +10,13 @@ cache:
     directories:
         - node_modules
 env:
-  - CXX=g++-4.8
   matrix:
-   - NODE_ENV=development
-   - NODE_ENV=production
-addons:
-  apt:
-    sources:
-      - ubuntu-toolchain-r-test
-    packages:
-      - g++-4.8
+    - 
+      CXX=g++-4.8
+      NODE_ENV=development
+    -
+      CXX=g++-4.8
+      NODE_ENV=production
 before_install: 
   - sudo apt-get install libcairo2-dev libjpeg8-dev libpango1.0-dev libgif-dev build-essential g++
   - npm install babel-preset-es2015 
