@@ -20,9 +20,17 @@ var Timeline = React.createClass({
      */
     displayImage: function (obj) {
         var dataURL = obj.image;
+        var creator = obj.creator;
+        var createdDate = obj.createdDate;
+        var id = obj.id;
         return (
-            <li>
-                <DrawingImage creator={""} dataURL={dataURL} />
+            <li key={id}>
+                <DrawingImage
+                  id={id}
+                  creator={creator}
+                  createdDate={createdDate}
+                  dataURL={dataURL}
+                />
             </li>
         );
     },

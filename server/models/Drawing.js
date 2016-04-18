@@ -35,6 +35,7 @@ var DrawingSchema = new mongoose.Schema({
  */
 DrawingSchema.methods.toAPI = function () {
     return {
+        id: this._id,
         image: this.image.toString(),
         creator: this.owner.name,
         createdDate: this.createdDate,
