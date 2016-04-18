@@ -10,14 +10,21 @@ cache:
     directories:
         - node_modules
 env:
+  - CXX=g++-4.8
   matrix:
    - NODE_ENV=development
    - NODE_ENV=production
+addons:
+  apt:
+    sources:
+      - ubuntu-toolchain-r-test
+    packages:
+      - g++-4.8
 before_install: 
   - sudo apt-get install libcairo2-dev libjpeg8-dev libpango1.0-dev libgif-dev build-essential g++
+  - npm install babel-preset-es2015 
   - npm install babel-preset-react 
   - npm install babel-register
-  - npm install babel-preset-es2015 
   - npm install react-addons-test-utils@0.14.7
   - npm install istanbul
   - npm install coveralls
