@@ -1,21 +1,19 @@
 var React = require('react');
 var TestUtils = require('react-addons-test-utils');
 var chai = require('chai');
-var Provider = require('react-redux').Provider;
-var store = require('../../src/js/stores/reduxStore.js');
-var TimelineContainer = require('../../src/js/components/container/timelineContainer.jsx');
+var Timeline = require('../../src/js/components/presentation/timeline.jsx');
+
+require('whatwg-fetch');
 
 
-describe('test the Overlay component', function () {
+describe('test the Timeline component', function () {
     before('render and locate element', function () {
         this.renderedComponent = TestUtils.renderIntoDocument(
-            <Provider store={store}>
-                <TimelineContainer />
-            </Provider>
+            <Timeline images={[]} />
         );
         this.timeline = TestUtils.findRenderedComponentWithType(
             this.renderedComponent,
-            TimelineContainer);
+            Timeline);
     });
 
 

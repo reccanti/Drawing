@@ -7,11 +7,17 @@ var DrawingImage = require('./image.jsx');
  * displays the appropriate images
  */
 var Timeline = React.createClass({
+    /**
+     * Define the proptypes of the timeline
+     */
     propTypes: {
-        dataURLs: React.PropTypes.array,
+        images: React.PropTypes.array,
     },
 
 
+    /**
+     * Define how to render a single image on the timeline
+     */
     displayImage: function (obj) {
         var dataURL = obj.image;
         return (
@@ -22,6 +28,10 @@ var Timeline = React.createClass({
     },
 
 
+    /**
+     * Render the timeline by mapping the image information to and
+     * image component
+     */
     render: function () {
         return (
             <ul>

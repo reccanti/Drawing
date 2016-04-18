@@ -2,12 +2,17 @@
  * Functions related to the timeline component of the
  * main app screen.
  */
+var fetchImages;
+var checkStatus;
+var parseJSON;
+var updateStore;
+require('whatwg-fetch');
 
 /**
  * This function tells the store that the overlay state should be
  * closed.
  */
-var fetchImages = function () {
+fetchImages = function () {
     return fetch('/user/getImages', {
         method: 'POST',
         credentials: 'include',
@@ -18,7 +23,7 @@ var fetchImages = function () {
 /**
  * Check the status of a fetch request and ensure it is valid
  */
-var checkStatus = function (res) {
+checkStatus = function (res) {
     var error;
     if (res.status >= 200 && res.status < 300) {
         return res;
@@ -32,12 +37,16 @@ var checkStatus = function (res) {
 /**
  * Parse the JSON response from the request
  */
-var parseJSON = function (res) {
+parseJSON = function (res) {
     return res.json();
 };
 
 
-var updateStore = function () {
+/**
+ * A performs a fetch request to retrieve the current
+ * User's images
+ */
+updateStore = function () {
     return function (dispatch) {
         return fetchImages()
             .then(checkStatus)
@@ -56,8 +65,8 @@ var updateStore = function () {
                     images: images,
                 });
             });
-    }
-}
+    };
+};
 
         // fetch('/user/getImages', {
         //     method: 'POST',

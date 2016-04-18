@@ -36,6 +36,7 @@ var DrawingSchema = new mongoose.Schema({
 DrawingSchema.methods.toAPI = function () {
     return {
         image: this.image.toString(),
+        creator: this.owner.name,
         createdDate: this.createdDate,
     };
 };
@@ -51,7 +52,8 @@ DrawingSchema.statics.findByOwner = function (ownerId, callback) {
     };
     return DrawingModel
         .find(search)
-        .sort({ createdDate: 1 })
+        .populate('owner')
+        .sort({ createdDate: -1 })
         .select('image owner createdDate')
         .exec(callback);
 };

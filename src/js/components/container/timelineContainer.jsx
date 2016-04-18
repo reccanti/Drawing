@@ -12,12 +12,17 @@ var store = require('../../stores/reduxStore.js');
  */
 /* eslint react/prefer-stateless-function: 0 */
 var TimelineContainer = React.createClass({
+    propTypes: {
+        images: React.PropTypes.array,
+    },
+
     componentDidMount: function () {
         store.dispatch(actions.Timeline.Update());
     },
+
     render: function () {
         return (
-            <Timeline images={this.props.images}/>
+            <Timeline images={this.props.images} />
         );
     },
 });
