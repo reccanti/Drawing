@@ -27,6 +27,7 @@ before_install:
   - npm install eslint
   - npm install eslint-config-airbnb
   - npm install eslint-plugin-react
+  - npm install canvas
 script: npm run coverage
 after_success:
  - cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js
