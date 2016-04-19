@@ -1,6 +1,6 @@
 var React = require('react');
 var ReactDOM = require('react-dom');
-var atrament = require('atrament');
+var Atrament = require('atrament').Atrament;
 var RadioGroup = require('react-radio-group');
 var DrawingCanvas;
 // var $ = require('jquery');
@@ -29,7 +29,8 @@ DrawingCanvas = React.createClass({
             canvas: null,
             ctx: null,
             dragging: false,
-            color: 'black',
+            color: '#000000',
+            size: 1,
             scale: {
                 x: 1,
                 y: 1,
@@ -47,7 +48,10 @@ DrawingCanvas = React.createClass({
 
         // apply any initial canvas scale factors
         // var scale = this._getCanvasScaleFactor(canvas);
-        var atrcanvas = atrament(canvas, canvas.width, canvas.height);
+        var atrcanvas = new Atrament(canvas, canvas.width, canvas.height);
+        atrcanvas.weight = this.state.size;
+        console.log(this.state.color);
+        atrcanvas.colour = this.state.color;
 
         /* eslint react/no-did-mount-set-state: 0 */
         this.setState({
@@ -158,17 +162,20 @@ DrawingCanvas = React.createClass({
         /* eslint no-console: 0 */
         this.props.submit(data);
     },
-    
-    
+
+
+    /**
+     * Describe how to render the radio buttons
+     */
     _renderRadio: function (Radio) {
         return (
             <div>
               <p>
-                <Radio id="radio_black" value="black" />
+                <Radio id="radio_black" value="#000000" />
                 <label htmlFor="radio_black">Black</label>
               </p>
               <p>
-                <Radio id="radio_white" value="white" />
+                <Radio id="radio_white" value="#FFFFFF" />
                 <label htmlFor="radio_white">White</label>
               </p>
             </div>
@@ -176,11 +183,34 @@ DrawingCanvas = React.createClass({
     },
 
 
-    handleChange: function (value) {
+    /**
+     * When the color radio buttons are updated, update the color state
+     */
+    handleColorsChange: function (value) {
+        /* eslint quote-props: 0 */
+        console.log(value);
         this.setState({ 'color': value });
+        // newCanvas = this.state.canvas;
+        // newCanvas.colour = this.state.color;
+        // this.setState({'canvas': newCanvas});
+        this.state.canvas.color = value;
     },
-    
-    
+
+
+    /**
+     * When the size slider is updated, update the size state
+     */
+    handleSizeChange: function (e) {
+        /* eslint quote-props: 0 */
+        var size = parseInt(e.target.value, 10);
+        this.setState({ 'size': size });
+        this.state.canvas.weight = size;
+    },
+
+
+    /**
+     * Prevent the click event from bubbling up to the parent div
+     */
     preventBubbling: function (e) {
         /* eslint no-param-reassign: 0 */
         e.cancelBubble = true;
@@ -206,11 +236,23 @@ DrawingCanvas = React.createClass({
                     <div>
                         <label htmlFor="BrushSize">Brush Size</label>
                         <p className="range-field">
-                            <input type="range" id="slider_size" min={0} max={20} name="BrushSize" />
+                            <input
+                              type="range"
+                              id="slider_size"
+                              min={0}
+                              max={30}
+                              name="BrushSize"
+                              defaultValue={this.state.size}
+                              onChange={this.handleSizeChange}
+                            />
                         </p>
                     </div>
                     <label>Brush Color</label>
-                    <RadioGroup name="BrushColor" selectedValue={this.state.color} onChange={this.handleChange}>
+                    <RadioGroup
+                      name="BrushColor"
+                      selectedValue={this.state.color}
+                      onChange={this.handleColorsChange}
+                    >
                         {this._renderRadio}
                     </RadioGroup>
                     <div className="section">
