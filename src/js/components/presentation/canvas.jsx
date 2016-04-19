@@ -1,9 +1,13 @@
 var React = require('react');
 var ReactDOM = require('react-dom');
 var atrament = require('atrament');
+var RadioGroup = require('react-radio-group');
+var DrawingCanvas;
+// var $ = require('jquery');
+require('materialize-js');
 
 
-var DrawingCanvas = React.createClass({
+DrawingCanvas = React.createClass({
 
 
     /**
@@ -25,6 +29,7 @@ var DrawingCanvas = React.createClass({
             canvas: null,
             ctx: null,
             dragging: false,
+            color: 'black',
             scale: {
                 x: 1,
                 y: 1,
@@ -153,8 +158,29 @@ var DrawingCanvas = React.createClass({
         /* eslint no-console: 0 */
         this.props.submit(data);
     },
+    
+    
+    _renderRadio: function (Radio) {
+        return (
+            <div>
+              <p>
+                <Radio id="radio_black" value="black" />
+                <label htmlFor="radio_black">Black</label>
+              </p>
+              <p>
+                <Radio id="radio_white" value="white" />
+                <label htmlFor="radio_white">White</label>
+              </p>
+            </div>
+        );
+    },
 
 
+    handleChange: function (value) {
+        this.setState({ 'color': value });
+    },
+    
+    
     preventBubbling: function (e) {
         /* eslint no-param-reassign: 0 */
         e.cancelBubble = true;
@@ -177,7 +203,19 @@ var DrawingCanvas = React.createClass({
                 >
                 </canvas>
                 <div className="card-action">
-                    <a href="#" onClick={this.onCardSubmit}>Submit</a>
+                    <div>
+                        <label htmlFor="BrushSize">Brush Size</label>
+                        <p className="range-field">
+                            <input type="range" id="slider_size" min={0} max={20} name="BrushSize" />
+                        </p>
+                    </div>
+                    <label>Brush Color</label>
+                    <RadioGroup name="BrushColor" selectedValue={this.state.color} onChange={this.handleChange}>
+                        {this._renderRadio}
+                    </RadioGroup>
+                    <div className="section">
+                        <a href="#" onClick={this.onCardSubmit}>Submit</a>
+                    </div>
                 </div>
             </div>
         );

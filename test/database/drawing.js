@@ -1,9 +1,10 @@
 var mongoose = require('mongoose');
 var dbURL = 'mongodb://localhost/Drawing-Test';
+var UserModel = require('../../server/models/User');
 var DrawingModel = require('../../server/models/Drawing');
 var chai = require('chai');
 var testDataURL1 = require('./dataURL.js').first;
-var testDataURL2 = require('./dataURL.js').second;
+// var testDataURL2 = require('./dataURL.js').second;
 
 mongoose.createConnection(dbURL);
 // describe('Static tests for the Drawing model', function () {
@@ -33,7 +34,7 @@ describe('Tests the Drawing model', function () {
             return done();
         }
         if (mongoose.connection.readyState === 0) {
-            mongoose.createConnection(dbURL, function (err) {
+            mongoose.connect(dbURL, function (err) {
                 if (err) {
                     throw err;
                 }
@@ -48,7 +49,7 @@ describe('Tests the Drawing model', function () {
 
     afterEach(function (done) {
         mongoose.connection.close();
-        return done();
+        done();
     });
 
 
@@ -64,68 +65,94 @@ describe('Tests the Drawing model', function () {
 
 
     it('Gets the correct information from toAPI', function (done) {
-        var saveData = {
-            owner: 1,
-            image: testDataURL1,
-        };
-        var drawing = new DrawingModel.Model(saveData);
-        var api = drawing.toAPI();
-        drawing.save();
-        chai.expect(api.image.toString()).to.eql(testDataURL1);
-        chai.expect(api.createdDate).to.be.a('Date');
-        done();
-    });
-
-
-    it('fetches all data from a user', function (done) {
-        var drawing1;
-        var drawing2;
-        var saveData1 = {
-            owner: 1,
-            image: testDataURL1,
-        };
-        var saveData2 = {
-            owner: 1,
-            image: testDataURL2,
-        };
-        drawing1 = new DrawingModel.Model(saveData1);
-        drawing1.save();
-        drawing2 = new DrawingModel.Model(saveData2);
-        drawing2.save();
-        DrawingModel.Model.findByOwner(1, function (err, accounts) {
-            var account1 = accounts[0].toAPI();
-            var account2 = accounts[1].toAPI();
-            chai.expect(err).to.be.null;
-            chai.expect(accounts).not.to.be.null;
-            chai.expect(accounts.length).to.eql(2);
-            chai.expect(account1.createdDate).to.be.a('Date');
-            chai.expect(account2.createdDate).to.be.a('Date');
-            chai.expect(account1.image.toString()).not.to.eql(account2.image.toString());
-            chai.expect(account1.image.toString()).to.eql(testDataURL1);
-            chai.expect(account2.image.toString()).to.eql(testDataURL2);
+        var password = 'testpass';
+        UserModel.Model.generateHash(password, function (salt, hash) {
+            var userData = {
+                username: 'testUser',
+                name: 'user1',
+                password: hash,
+                salt: salt,
+            };
+            var testUser = new UserModel.Model(userData);
+            testUser.save(testUser.validatePassword(password, function () {
+                var ownerId = testUser.toAPI()._id;
+                var saveData = {
+                    owner: ownerId,
+                    image: testDataURL1,
+                };
+                var drawing = new DrawingModel.Model(saveData);
+                // var api = drawing.toAPI();
+                /* eslint no-console: 0 */
+                drawing.save();
+                DrawingModel.Model.findByOwner(ownerId, function (err, accounts) {
+                    var account1 = accounts[0];
+                    chai.expect(err).to.be.null;
+                    chai.expect(accounts).not.to.be.null;
+                    chai.expect(accounts.length).to.eql(1);
+                    chai.expect(account1.createdDate).to.be.a('Date');
+                    chai.expect(account1.image.toString()).to.eql(testDataURL1);
+                    chai.expect(account1.owner.name).to.eql(userData.name);
+                    done();
+                });
+                // done();
+                // chai.expect(api.image.toString().to.eql(testDataURL1));
+                // chai.expect(api.createdDate).to.be.a('Date');
+                // chai.expect(api.creator).to.eql(userData.username);
+                // done();
+            }));
         });
-        done();
-        // var saveDrawing1 = function (callback) {
-        //     drawing1 = new DrawingModel.Model(saveData1);
-        //     drawing1.save(callback);
-        // };
-        // var saveDrawing2 = function (callback) {
-        //     drawing2 = new DrawingModel.Model(saveData2);
-        //     drawing2.save(callback);
-        // };
-        // var testData = function () {
-        //     DrawingModel.findByOwner(1, function (err, accounts) {
-        //         chai.expect(err).to.be.null;
-        //         chai.expect(accounts).to.be.an('Object');
-        //         done();
-        //     });
-        // };
-        // saveDrawing1(function (err1) {
-        //     chai.expect(err1).to.be.null;
-        //     saveDrawing2(function (err2) {
-        //         chai.expect(err2).to.be.null;
-        //         testData();
-        //     });
-        // });
     });
+
+
+    // it('fetches all data from a user', function (done) {
+    //     // var drawing1;
+    //     // var drawing2;
+    //     // var saveData1 = {
+    //     //     owner: 1,
+    //     //     image: testDataURL1,
+    //     // };
+    //     // var saveData2 = {
+    //     //     owner: 1,
+    //     //     image: testDataURL2,
+    //     // };
+    //     // drawing1 = new DrawingModel.Model(saveData1);
+    //     // drawing1.save();
+    //     // drawing2 = new DrawingModel.Model(saveData2);
+    //     // drawing2.save();
+    //     // DrawingModel.Model.findByOwner(1, function (err, accounts) {
+    //     //     var account1 = accounts[0].toAPI();
+    //     //     var account2 = accounts[1].toAPI();
+    //     //     chai.expect(err).to.be.null;
+    //     //     chai.expect(accounts).not.to.be.null;
+    //     //     chai.expect(accounts.length).to.eql(2);
+    //     //     chai.expect(account1.createdDate).to.be.a('Date');
+    //     //     chai.expect(account2.createdDate).to.be.a('Date');
+    //     //     chai.expect(account1.image.toString()).not.to.eql(account2.image.toString());
+    //     //     chai.expect(account1.image.toString()).to.eql(testDataURL1);
+    //     //     chai.expect(account2.image.toString()).to.eql(testDataURL2);
+    //     // });
+    //     // done();
+    //     // var saveDrawing1 = function (callback) {
+    //     //     drawing1 = new DrawingModel.Model(saveData1);
+    //     //     drawing1.save(callback);
+    //     // };
+    //     // var saveDrawing2 = function (callback) {
+    //     //     drawing2 = new DrawingModel.Model(saveData2);
+    //     //     drawing2.save(callback);
+    //     // };
+    //     // var testData = function () {
+    //     //     DrawingModel.findByOwner(1, function (err, accounts) {
+    //     //         chai.expect(err).to.be.null;
+    //     //         chai.expect(accounts).to.be.an('Object');
+    //     //         done();
+    //     //     });
+    //     // };
+    //     // saveDrawing1(function (err1) {
+    //     //     chai.expect(err1).to.be.null;
+    //     //     saveDrawing2(function (err2) {
+    //     //         chai.expect(err2).to.be.null;
+    //     //         testData();
+    //     //     });
+    //     // });
+    // });
 });

@@ -4,3 +4,8 @@
 @import "layout/layout";
 
 @import "components/DrawingCanvas";
+
+// temporary fix for moving checkbox label
+[type="radio"]:not(:checked) + label,
+[type="radio"]:checked + label {
+  transition: none;}
