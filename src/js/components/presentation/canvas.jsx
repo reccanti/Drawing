@@ -3,8 +3,8 @@ var ReactDOM = require('react-dom');
 var Atrament = require('atrament').Atrament;
 var RadioGroup = require('react-radio-group');
 var DrawingCanvas;
-// var $ = require('jquery');
-require('materialize-js');
+// window.jquery = require('jquery');
+// require('materialize-js');
 
 
 DrawingCanvas = React.createClass({

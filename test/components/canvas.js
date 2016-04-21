@@ -1,6 +1,7 @@
 var React = require('react');
 var TestUtils = require('react-addons-test-utils');
 var chai = require('chai');
+// var proxyquire = require('proxyquire');
 
 var DrawingCanvas = require('../../src/js/components/presentation/canvas.jsx');
 

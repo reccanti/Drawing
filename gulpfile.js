@@ -3,10 +3,10 @@ var gutil = require('gulp-util');
 
 // define the react task
 var react = require("./dev/tasks/react");
+var materializeTask = require('./dev/tasks/materialize');
 var reactTaskWatch = react(["src/js/components/container/route.jsx"], "dist/js/componentsbundle.js", true);
 var reactTaskStatic = react(["src/js/components/container/route.jsx"], "dist/js/componentsbundle.js", false)
 
-// styles
 // var sassTask = require("./dev/tasks/sass");
 var sass = require('./dev/tasks/sass');
 sassTask = sass('src/sass/main.scss', 'dist/css');
@@ -29,12 +29,13 @@ gulp.task('favicon', [], function () {
         .pipe(gulp.dest('dist/'));
 });
 
+gulp.task('materialize', [], materializeTask);
 
 gulp.task("watch-react", [], reactTaskWatch);
 gulp.task("react",[], reactTaskStatic);
 gulp.task('sass', [], sassTask);
-gulp.task('build', ['react', 'sass', 'fonts', 'favicon']);
+gulp.task('build', ['react', 'materialize', 'sass', 'fonts', 'favicon']);
 
-gulp.task('watch', ['watch-sass', 'watch-react', 'fonts', 'favicon']);
+gulp.task('watch', ['watch-sass', 'watch-react', 'materialize', 'fonts', 'favicon']);
 
 gulp.task("default", ["sass"]);
