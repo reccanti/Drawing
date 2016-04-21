@@ -3,7 +3,7 @@ var gutil = require('gulp-util');
 
 // define the react task
 var react = require("./dev/tasks/react");
-// var materializeTask = require('./dev/tasks/materialize');
+var materializeTask = require('./dev/tasks/materialize');
 var reactTaskWatch = react(["src/js/components/container/route.jsx"], "dist/js/componentsbundle.js", true);
 var reactTaskStatic = react(["src/js/components/container/route.jsx"], "dist/js/componentsbundle.js", false)
 
