@@ -34,7 +34,7 @@ gulp.task('materialize', [], materializeTask);
 gulp.task("watch-react", [], reactTaskWatch);
 gulp.task("react",[], reactTaskStatic);
 gulp.task('sass', [], sassTask);
-gulp.task('build', ['react', 'sass', 'fonts', 'favicon', 'materialize']);
+gulp.task('build', ['react', 'sass', 'fonts', 'favicon']);
 
 gulp.task('watch', ['watch-sass', 'watch-react', 'fonts', 'favicon']);
 
