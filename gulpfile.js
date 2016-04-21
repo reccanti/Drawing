@@ -29,7 +29,7 @@ gulp.task('favicon', [], function () {
         .pipe(gulp.dest('./dist/'));
 });
 
-// gulp.task('materialize', [], materializeTask);
+gulp.task('materialize', [], materializeTask);
 
 gulp.task("watch-react", [], reactTaskWatch);
 gulp.task("react",[], reactTaskStatic);
