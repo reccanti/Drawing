@@ -25,8 +25,8 @@ gulp.task('fonts', [], function() {
 });
 
 gulp.task('favicon', [], function () {
-    return gulp.src(['src/favicon.png'])
-        .pipe(gulp.dest('dist/'));
+    return gulp.src(['./src/favicon.png'])
+        .pipe(gulp.dest('./dist/'));
 });
 
 gulp.task('materialize', [], materializeTask);
