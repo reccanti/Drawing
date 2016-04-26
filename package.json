@@ -6,12 +6,13 @@
   "repository": "https://github.com/reccanti/Drawing",
   "scripts": {
     "pretest": "eslint src/**/*.js src/**/*.jsx server/**/*.js test/**/*.js",
-    "test": "mocha --require ./test/jsdomSetup.js --compilers js:babel-register --recursive ./test",
+    "test": "NODE_ENV=test mocha --require ./test/jsdomSetup.js --compilers js:babel-register --recursive ./test",
     "buildReact": "gulp react",
-    "coverage": "DEBUG=false istanbul cover _mocha --  --require ./test/jsdomSetup.js --compilers js:babel-register --recursive ./test",
+    "coverage": "NODE_ENV=test DEBUG=false istanbul cover _mocha --  --require ./test/jsdomSetup.js --compilers js:babel-register --recursive ./test",
     "start": "gulp build && node ./bin/www",
     "debug": "gulp react && DEBUG=express:* node ./bin/www",
-    "watch": "gulp watch"
+    "watch": "gulp watch",
+    "build": "gulp build"
   },
   "author": "Ben Wilcox",
   "license": "MIT",
