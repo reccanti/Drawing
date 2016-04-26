@@ -66,6 +66,7 @@
     "coveralls": "^2.11.9",
     "eslint": "^2.7.0",
     "eslint-config-airbnb": "^6.2.0",
+    "eslint-plugin-jsx-a11y": "^1.0.3",
     "eslint-plugin-react": "^4.2.3",
     "gulp-clean": "^0.3.2",
     "istanbul": "^1.0.0-alpha.2",

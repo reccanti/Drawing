@@ -40,6 +40,7 @@ before_install:
   - npm install jsdom
   - npm install supertest
   - npm install eslint
+  - npm install eslint-plugin-jsx-a11y
   - npm install eslint-config-airbnb
   - npm install eslint-plugin-react@4.3.0
   - npm install canvas
