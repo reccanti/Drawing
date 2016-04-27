@@ -54,15 +54,30 @@ var LoginForm = React.createClass({
      */
     render: function () {
         return (
-            <form action="/login" method="POST" ref="form" onSubmit={this.submitForm}>
-                <label htmlFor="username">Username</label>
-                <input type="text" name="username" ref="username" onChange={this.setUsername} />
-                <label htmlFor="password">Password</label>
-                <input type="text" name="password" ref="password" onChange={this.setPassword} />
-                <button type="submit" ref="submit" >Submit</button>
+            <form
+              className="card"
+              action="/login"
+              method="POST"
+              ref="form"
+              onSubmit={this.submitForm}
+            >
+                <div className="card-content">
+                    <p className="card-title">Sign in</p>
+                    <label htmlFor="username">Username</label>
+                    <input type="text" name="username" ref="username" onChange={this.setUsername} />
+                    <label htmlFor="password">Password</label>
+                    <input type="text" name="password" ref="password" onChange={this.setPassword} />
 
-                <Link to="/signup">Sign up for an account</Link>
-                <Link to="/">Return to Home</Link>
+                    <button
+                      className="btn waves-effect waves-light"
+                      type="submit"
+                      ref="submit"
+                      name="action"
+                    >
+                        Submit
+                    </button>
+                    <Link className="right" to="/signup"> Sign up for an account</Link>
+                </div>
             </form>
         );
     },

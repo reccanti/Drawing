@@ -125,8 +125,8 @@ AppLayout = React.createClass({
         }
         return (
             <div>
-                <div className="Main">
-                    <div>
+                <div className="Main row">
+                    <div className="col s12">
                         <p>{this.props.username}</p>
                         <button onClick={this._openOverlay}>New Drawing</button>
                         <Link to="/login" onClick={this._logout}>Log out</Link>

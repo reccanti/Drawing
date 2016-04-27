@@ -52,7 +52,11 @@ var LoginLayout = React.createClass({
      */
     render: function () {
         return (
-            <LoginForm login={this.login} />
+            <div className="appContainer row valign-wrapper">
+                <div className="valign col s10 m6 offset-m3 offset-s1">
+                    <LoginForm login={this.login} />
+                </div>
+            </div>
         );
     },
 });
