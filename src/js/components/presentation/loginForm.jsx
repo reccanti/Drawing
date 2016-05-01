@@ -62,7 +62,7 @@ var LoginForm = React.createClass({
               onSubmit={this.submitForm}
             >
                 <div className="card-content">
-                    <p className="card-title">Sign in</p>
+                    <p className="card-title">Log in</p>
                     <label htmlFor="username">Username</label>
                     <input type="text" name="username" ref="username" onChange={this.setUsername} />
                     <label htmlFor="password">Password</label>

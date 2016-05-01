@@ -56,7 +56,11 @@ var SignupLayout = React.createClass({
      */
     render: function () {
         return (
-            <SignupForm signup={this.signup} />
+            <div className="appContainer row valign-wrapper">
+                <div className="valign col s10 m6 offset-m3 offset-s1">
+                    <SignupForm signup={this.signup} />
+                </div>
+            </div>
         );
     },
 });

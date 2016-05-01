@@ -76,17 +76,33 @@ var SignupForm = React.createClass({
      */
     render: function () {
         return (
-            <form action="/signup" method="POST" onSubmit={this.submitForm}>
-                <label htmlFor="username">Username</label>
-                <input type="text" name="username" onChange={this.setUsername} />
-                <label htmlFor="name">Name</label>
-                <input type="text" name="name" onChange={this.setName} />
-                <label htmlFor="password">Password</label>
-                <input type="text" name="password" onChange={this.setPassword} />
-                <label htmlFor="password_conf">Confirm Password</label>
-                <input type="text" name="password_conf" onChange={this.setPasswordConfirmed} />
-                <button type="submit">Submit</button>
-                <Link to="/">Return to Home</Link>
+            <form
+              className="card"
+              action="/signup"
+              method="POST"
+              ref="form"
+              onSubmit={this.submitForm}
+            >
+                <div className="card-content">
+                    <p className="card-title">Sign Up</p>
+                    <label htmlFor="username">Username</label>
+                    <input type="text" name="username" onChange={this.setUsername} />
+                    <label htmlFor="name">Name</label>
+                    <input type="text" name="name" onChange={this.setName} />
+                    <label htmlFor="password">Password</label>
+                    <input type="text" name="password" onChange={this.setPassword} />
+                    <label htmlFor="password_conf">Confirm Password</label>
+                    <input type="text" name="password_conf" onChange={this.setPasswordConfirmed} />
+                    <button
+                      className="btn waves-effect waves-light"
+                      type="submit"
+                      ref="submit"
+                      name="action"
+                    >
+                        Submit
+                    </button>
+                    <Link className="right" to="/login">Return to Log In</Link>
+                </div>
             </form>
         );
     },
