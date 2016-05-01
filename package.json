@@ -12,7 +12,7 @@
     "start": "gulp build && node ./bin/www",
     "debug": "gulp react && DEBUG=express:* node ./bin/www",
     "watch": "gulp watch",
-    "build": "gulp build"
+    "build": "gulp clean && gulp build"
   },
   "author": "Ben Wilcox",
   "license": "MIT",
@@ -25,6 +25,7 @@
     "connect-redis": "^3.0.2",
     "cookie-parser": "^1.4.1",
     "csurf": "^1.8.3",
+    "del": "^2.2.0",
     "express": "^4.13.4",
     "express-session": "^1.13.0",
     "gulp": "^3.9.1",

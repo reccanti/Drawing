@@ -1,5 +1,7 @@
 var gulp = require("gulp");
 var gutil = require('gulp-util');
+var del = require('del');
+var path = require('path');
 
 // define the react task
 var react = require("./dev/tasks/react");
@@ -27,6 +29,10 @@ gulp.task('fonts', [], function() {
 gulp.task('favicon', [], function () {
     return gulp.src(['./src/favicon.png'])
         .pipe(gulp.dest('./dist/'));
+});
+
+gulp.task('clean', [] , function() {
+    return del([path.resolve(__dirname, './dist')])
 });
 
 gulp.task('materialize', [], materializeTask);
