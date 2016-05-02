@@ -31,6 +31,8 @@ env:
       CXX=g++-4.8
       NODE_ENV=production
 before_install: 
+  - sudo npm install -g npm *
+  - npm -v
   - sudo apt-get install libcairo2-dev libjpeg8-dev libpango1.0-dev libgif-dev build-essential g++
   - npm install babel-preset-es2015 
   - npm install babel-preset-react 
