@@ -83,16 +83,17 @@ describe('Tests the Drawing model', function () {
                 var drawing = new DrawingModel.Model(saveData);
                 // var api = drawing.toAPI();
                 /* eslint no-console: 0 */
-                drawing.save();
-                DrawingModel.Model.findByOwner(ownerId, function (err, accounts) {
-                    var account1 = accounts[0];
-                    chai.expect(err).to.be.null;
-                    chai.expect(accounts).not.to.be.null;
-                    chai.expect(accounts.length).to.eql(1);
-                    chai.expect(account1.createdDate).to.be.a('Date');
-                    chai.expect(account1.image.toString()).to.eql(testDataURL1);
-                    chai.expect(account1.owner.name).to.eql(userData.name);
-                    done();
+                drawing.save(function () {
+                    DrawingModel.Model.findByOwner(ownerId, function (err, accounts) {
+                        var account1 = accounts[0];
+                        chai.expect(err).to.be.null;
+                        chai.expect(accounts).not.to.be.null;
+                        chai.expect(accounts.length).to.eql(1);
+                        chai.expect(account1.createdDate).to.be.a('Date');
+                        chai.expect(account1.image.toString()).to.eql(testDataURL1);
+                        chai.expect(account1.owner.name).to.eql(userData.name);
+                        done();
+                    });
                 });
                 // done();
                 // chai.expect(api.image.toString().to.eql(testDataURL1));
