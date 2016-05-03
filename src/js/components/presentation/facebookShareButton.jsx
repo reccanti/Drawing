@@ -8,7 +8,7 @@ var FacebookShareButton = React.createClass({
     postImage: function() {
         var wallPost = {
             message: "Test to post a photo",
-            picture: this.props.src
+            url: this.props.src
         };
         FB.api('/me/feed', 'post', wallPost , function(response) {
             if (!response || response.error) {
