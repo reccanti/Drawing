@@ -2,8 +2,10 @@ var React = require('react');
 var DrawingImage = function (props) {
     return (
         <div>
-            <p>{props.creator} - {props.createdDate}</p>
             <img className="Timeline_image card" src={props.dataURL} />
+            <div className="right">
+                <a className="btn-floating btn-small waves-effect waves-light red"><i className="material-icons">f</i></a>
+            </div>
         </div>
     );
 };
