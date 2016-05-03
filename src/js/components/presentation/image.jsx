@@ -1,10 +1,12 @@
 var React = require('react');
+var FacebookShareButton = require('./facebookShareButton.jsx');
+
 var DrawingImage = function (props) {
     return (
         <div>
             <img className="Timeline_image card" src={props.dataURL} />
             <div className="right">
-                <a className="btn-floating btn-small waves-effect waves-light red"><i className="material-icons">f</i></a>
+                <FacebookShareButton img={props.dataURL} />
             </div>
         </div>
     );
