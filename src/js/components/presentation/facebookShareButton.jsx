@@ -19,18 +19,18 @@ var FacebookShareButton = React.createClass({
         });
     },
     
-    
     clickButton: function () {
+        var self = this;
         FB.getLoginStatus(function(response){
             if (response.status == 'connected') {
                 accessToken = response.authResponse.accessToken;
-                this.postImage();
+                self.postImage();
             }
             else {
                 FB.login(function(response){
                 if (response.status == 'connected') {
                     accessToken = response.authResponse.accessToken;
-                    this.postImage();
+                    self.postImage();
                 }
                 else {
                     alert("Bye.");
