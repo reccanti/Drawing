@@ -12,9 +12,9 @@ var FacebookShareButton = React.createClass({
         };
         FB.api('/me/feed', 'post', wallPost , function(response) {
             if (!response || response.error) {
-            alert('Failure! ' + response.status + ' You may logout once and try again');
+                alert('Failure! ' + response.status + ' You may logout once and try again');
             } else {
-            alert('Success! Post ID: ' + response);
+                alert('Success! Post ID: ' + response);
             }
         });
     },
@@ -35,7 +35,7 @@ var FacebookShareButton = React.createClass({
                 else {
                     alert("Bye.");
                 }
-                }, {scope:'user_photos'});
+                }, {scope:'user_photos,publish_actions'});
             }
         });
     },
