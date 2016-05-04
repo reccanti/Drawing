@@ -9,8 +9,6 @@ var Drawing = require('../controllers').Drawing;
  * an account.
  */
 router.post('/saveImage', function (req, res) {
-    /* eslint no-console: 0 */
-    console.log(req.body);
     Drawing.saveImage(req, res);
 });
 

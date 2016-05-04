@@ -92,6 +92,6 @@ app.use('/session', routes.session);
 app.use('/signup', routes.signup);
 app.use('/login', routes.login);
 app.use('/user', routes.user);
-app.get('*', serveIndex);
+app.get('*', routes.any);
 
 module.exports = app;
