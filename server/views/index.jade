@@ -1,10 +1,14 @@
 // This is a single-page application. This page
 // Serves as an entry-point into the React app
 doctype html
-html(lang="en")
+html(lang="en", prefix="og: http://ogp.me/ns#")
     head
         title="Drawing"
         link(href="/assets/css/main.css", type="text/css", rel="stylesheet")
+        meta(property="og:title", content="Drawing")
+        meta(property="og:description", content="A drawing by me")
+        meta(property="og:type", content="website")
+        meta(property="og:image", content="/assets/favicon.png")
     body
         script.
             window.fbAsyncInit = function() {
