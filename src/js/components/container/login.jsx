@@ -34,7 +34,7 @@ var LoginLayout = React.createClass({
                     type: 'LOGIN_SUCCESS',
                     results: result,
                 });
-                browserHistory.push('/u/' + result.username); // redirect to root after logging in
+                // browserHistory.push('/u/' + result.username); // redirect to root after logging in
             },
             error: function (xhr) {
                 var errormsg = JSON.parse(xhr.responseText);

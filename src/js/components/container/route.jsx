@@ -13,6 +13,7 @@ var store = require('../../stores/reduxStore.js');
 var SignupLayout = require('./signup.jsx');
 var LoginLayout = require('./login.jsx');
 var AppLayout = require('./app.jsx');
+var Overlay = require('./overlay.jsx');
 
 var requiresLogin;
 var requiresLogout;
@@ -33,9 +34,9 @@ require('whatwg-fetch');
  */
 requiresLogin = function (nextState, replace) {
     if (!store.getState().loginState.username) {
-        replace({
-            pathname: '/login',
-        });
+        // replace({
+        //     pathname: '/login',
+        // });
     }
 };
 
@@ -47,9 +48,9 @@ requiresLogin = function (nextState, replace) {
  */
 requiresLogout = function (nextState, replace) {
     if (store.getState().loginState.username) {
-        replace({
-            pathname: '/u/' + store.getState().loginState.username,
-        });
+        // replace({
+        //     pathname: '/u/' + store.getState().loginState.username,
+        // });
     }
 };
 
@@ -85,7 +86,7 @@ login = function (res) {
         results: res,
     });
     // renderApp();
-    toUrl('/u/' + res.username);
+    // toUrl('/u/' + res.username);
 };
 
 
@@ -98,7 +99,7 @@ errOut = function (err) {
         type: 'LOGIN_FAILURE',
         error: errormsg,
     });
-    toUrl('/login');
+    // toUrl('/login');
 };
 
 
@@ -151,9 +152,12 @@ AppRoute = React.createClass({
             <Provider store={store}>
                 <Router history={browserHistory} >
                     <Route path="/" onEnter={redirect}>
-                        <Route path="/u/:username" component={AppLayout} onEnter={requiresLogin} />
-                        <Route path="/signup" component={SignupLayout} onEnter={requiresLogout} />
-                        <Route path="/login" component={LoginLayout} onEnter={requiresLogout} />
+                        <IndexRoute component={AppLayout} onEnter={redirect} />
+                        <Route path="u/:username" component={AppLayout} onEnter={requiresLogin}>
+                            <Route path="i/:image" component={Overlay} />
+                        </Route>
+                        <Route path="login" component={LoginLayout} onEnter={requiresLogout} />
+                        <Route path="signup" component={SignupLayout} onEnter={requiresLogout} />
                     </Route>
                 </Router>
             </Provider>

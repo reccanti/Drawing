@@ -12,10 +12,19 @@ require('whatwg-fetch');
  * This function tells the store that the overlay state should be
  * closed.
  */
-fetchImages = function () {
+fetchImages = function (username) {
+    var data = {
+        username: username,
+    };
+    console.log(JSON.stringify(data));
     return fetch('/user/getImages', {
         method: 'POST',
+        headers: {
+            Accept: 'application/json',
+            'Content-Type': 'application/json',
+        },
         credentials: 'include',
+        body: JSON.stringify(data),
     });
 };
 
@@ -46,9 +55,9 @@ parseJSON = function (res) {
  * A performs a fetch request to retrieve the current
  * User's images
  */
-updateStore = function () {
+updateStore = function (username) {
     return function (dispatch) {
-        return fetchImages()
+        return fetchImages(username)
             .then(checkStatus)
             .then(parseJSON)
             .then(function (res) {

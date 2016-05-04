@@ -47,23 +47,23 @@ AppLayout = React.createClass({
 
     // TODO MOVE THIS INTO THE TIMELINE
     componentDidMount: function () {
-        var _this = this;
-        fetch('/user/getImages', {
-            method: 'POST',
-            credentials: 'include',
-        })
-        .then(function (res) {
-            return res.json();
-        })
-        .then(function (res) {
-            var urls = [];
-            res.drawings.map(function (data) {
-                urls.push(data.image);
-                return 0;
-            });
-            _this.setState({ 'dataURLs': urls });
-            return 0;
-        });
+        // var _this = this;
+        // fetch('/user/getImages', {
+        //     method: 'POST',
+        //     credentials: 'include',
+        // })
+        // .then(function (res) {
+        //     return res.json();
+        // })
+        // .then(function (res) {
+        //     var urls = [];
+        //     res.drawings.map(function (data) {
+        //         urls.push(data.image);
+        //         return 0;
+        //     });
+        //     _this.setState({ 'dataURLs': urls });
+        //     return 0;
+        // });
     },
 
 
@@ -80,7 +80,7 @@ AppLayout = React.createClass({
                 store.dispatch({
                     type: 'LOGOUT',
                 });
-                browserHistory.push('/login');
+                // browserHistory.push('/login');
             });
     },
 
@@ -131,7 +131,10 @@ AppLayout = React.createClass({
                         <button onClick={this._openOverlay}>New Drawing</button>
                         <Link to="/login" onClick={this._logout}>Log out</Link>
                     </div>
-                    <TimelineContainer />
+                    <TimelineContainer username={this.props.params.username} />
+                </div>
+                <div>
+                    {this.props.children}
                 </div>
                 {overlay}
             </div>

@@ -1,7 +1,8 @@
 var express = require('express');
 var router = express.Router();
 var Drawing = require('../controllers').Drawing;
-// var User = require('../controllers').User;
+var User = require('../controllers').User;
+var mid = require('../middleware');
 
 
 /**
@@ -13,9 +14,12 @@ router.post('/saveImage', function (req, res) {
 });
 
 
-router.post('/getImages', function (req, res) {
-    Drawing.getImages(req, res);
-});
+router.post('/getImages', 
+            mid.breakdownURL,
+            mid.getUsername,
+            function (req, res) {
+                User.getImages(req, res);
+            });
 
 
 module.exports = router;

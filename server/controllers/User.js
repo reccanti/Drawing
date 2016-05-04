@@ -1,5 +1,6 @@
 var models = require('../models');
 var User = models.User;
+var Drawing = models.Drawing;
 
 
 /**
@@ -67,5 +68,35 @@ var signup = function (req, res) {
 };
 
 
+/**
+ * Get all of the images that belong to a specific user
+ */
+var getImages = function (req, res) {
+    console.log('getting images');
+    console.log(req.params);
+    console.log(req.body);
+    if (!req.body.username) {
+        return res.status(400).json({ error: 'username is required' });
+    }
+    User.Model.findByUsername(req.body.username, function(err, doc) {
+        if (err) {
+            return res.status(400).json({ error: 'user with that username not found' });
+        }
+        var user = doc.toAPI();
+        Drawing.Model.findByOwner(user._id, function (err, docs) {
+            var images = [];
+            var i;
+            for (i = 0; i < docs.length; i++) {
+                images.push(docs[i].toAPI());
+            }
+            res.status(200).json({
+                drawings: images,
+            });
+        });
+    });
+}
+
+
 module.exports.signup = signup;
 module.exports.login = login;
+module.exports.getImages = getImages;

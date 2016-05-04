@@ -17,7 +17,7 @@ var TimelineContainer = React.createClass({
     },
 
     componentDidMount: function () {
-        store.dispatch(actions.Timeline.Update());
+        store.dispatch(actions.Timeline.Update(this.props.username));
     },
 
     render: function () {
