@@ -8,8 +8,7 @@ var DrawingImage = function (props) {
             <img className="Timeline_image card" src={props.dataURL} />
             <div className="right">
                 <FacebookButton
-                  className="btn-floating btn-small waves-effect waves-light blue" 
-                  url={"reccanti-socialdrawing.heroku.com/u/poop"}
+                  className="btn-floating btn-small waves-effect waves-light blue"
                 >
                     {"f"}
                 </FacebookButton>
