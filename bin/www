@@ -2,14 +2,16 @@
 
 var app = require("../server/app");
 var mongoose = require("mongoose");
+var Grid = require('gridfs-stream');
+var config = require('../server/config');
 
 
 /**
  * Connect to the Database using mongoose. Throw an error if a 
  * connection error occurred.
  */
-var dbURL = process.env.MONGOLAB_URI || "mongodb://localhost/Drawing";
-var db = mongoose.connect(dbURL, function (err) {
+Grid.mongo = mongoose.mongo;
+var db = mongoose.connect(config.dbURL, function (err) {
     if (err) {
         console.error("Could not connect to the database");
         throw err;
