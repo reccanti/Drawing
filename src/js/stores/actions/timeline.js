@@ -16,7 +16,6 @@ fetchImages = function (username) {
     var data = {
         username: username,
     };
-    console.log(JSON.stringify(data));
     return fetch('/user/getImages', {
         method: 'POST',
         headers: {

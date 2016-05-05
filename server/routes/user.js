@@ -14,7 +14,7 @@ router.post('/saveImage', function (req, res) {
 });
 
 
-router.post('/getImages', 
+router.post('/getImages',
             mid.breakdownURL,
             mid.getUsername,
             function (req, res) {

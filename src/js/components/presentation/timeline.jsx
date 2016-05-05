@@ -1,5 +1,6 @@
 var React = require('react');
 var DrawingImage = require('./image.jsx');
+var Link = require('react-router').Link;
 
 
 /**
@@ -25,12 +26,14 @@ var Timeline = React.createClass({
         var id = obj.id;
         return (
             <li key={id}>
-                <DrawingImage
-                  id={id}
-                  creator={creator}
-                  createdDate={createdDate}
-                  dataURL={dataURL}
-                />
+                <Link to={"/u/" + obj.creator + "/i/" + obj.id}>
+                    <DrawingImage
+                    id={id}
+                    creator={creator}
+                    createdDate={createdDate}
+                    dataURL={dataURL}
+                    />
+                </Link>
             </li>
         );
     },

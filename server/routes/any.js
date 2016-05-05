@@ -8,7 +8,7 @@ var controllers = require('../controllers');
  * Go through the necessary steps to sign the user up for
  * an account.
  */
-router.get('*', 
+router.get('*',
     mid.breakdownURL,
     mid.getUsername,
     controllers.any

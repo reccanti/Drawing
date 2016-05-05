@@ -78,12 +78,13 @@ var getImages = function (req, res) {
     if (!req.body.username) {
         return res.status(400).json({ error: 'username is required' });
     }
-    User.Model.findByUsername(req.body.username, function(err, doc) {
+    User.Model.findByUsername(req.body.username, function (err, doc) {
+        var user;
         if (err) {
             return res.status(400).json({ error: 'user with that username not found' });
         }
-        var user = doc.toAPI();
-        Drawing.Model.findByOwner(user._id, function (err, docs) {
+        user = doc.toAPI();
+        Drawing.Model.findByOwner(user._id, function (err2, docs) {
             var images = [];
             var i;
             for (i = 0; i < docs.length; i++) {
@@ -94,7 +95,7 @@ var getImages = function (req, res) {
             });
         });
     });
-}
+};
 
 
 module.exports.signup = signup;
