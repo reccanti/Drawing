@@ -9,6 +9,7 @@ var DrawingImage = function (props) {
             <div className="right">
                 <FacebookButton
                   className="btn-floating btn-small waves-effect waves-light blue"
+                  url={window.url + '/i/' + props.id}
                 >
                     {"f"}
                 </FacebookButton>

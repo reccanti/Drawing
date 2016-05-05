@@ -44,6 +44,20 @@ DrawingSchema.methods.toAPI = function () {
 
 
 /**
+ * Given the unique ID of the Drawing, retrieve it from the database
+ */
+DrawingSchema.statics.findById = function (id, callback) {
+    var search = {
+        _id: id
+    };
+    return DrawingModel
+        .findOne(search)
+        .select('image owner createdDate')
+        .exec(callback);
+};
+
+
+/**
  * Given the ID of a User, find all of the images associated with
  * that User
  */

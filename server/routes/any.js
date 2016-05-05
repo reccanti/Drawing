@@ -11,6 +11,7 @@ var controllers = require('../controllers');
 router.get('*',
     mid.breakdownURL,
     mid.getUsername,
+    mid.getImageId,
     controllers.any
 );
 
