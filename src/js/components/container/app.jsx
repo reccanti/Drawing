@@ -116,6 +116,7 @@ AppLayout = React.createClass({
      */
     render: function () {
         var overlay = undefined;
+        var userText = "";
         if (this.props.displayOverlay) {
             overlay = (
                 <Overlay close={this._closeOverlay} open={this._openOverlay}>
@@ -123,11 +124,18 @@ AppLayout = React.createClass({
                 </Overlay>
             );
         }
+        
+        if (this.props.username) {
+            userText = this.props.username;
+        } else {
+            userText = "Not currently logged in";
+        }
+        
         return (
             <div>
                 <div className="Main row">
                     <div className="col s12">
-                        <p>{this.props.username}</p>
+                        <p>{userText}</p>
                         <button onClick={this._openOverlay}>New Drawing</button>
                         <Link to="/login" onClick={this._logout}>Log out</Link>
                     </div>

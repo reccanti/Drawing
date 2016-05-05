@@ -14,6 +14,7 @@ var SignupLayout = require('./signup.jsx');
 var LoginLayout = require('./login.jsx');
 var AppLayout = require('./app.jsx');
 var Overlay = require('./overlay.jsx');
+var AppContainer = require('./main.jsx');
 
 var requiresLogin;
 var requiresLogout;
@@ -24,6 +25,9 @@ var toUrl;
 var errOut;
 var redirect;
 var AppRoute;
+var tryLogin;
+var redirectToPersonalPage;
+var redirectToLoginPage;
 
 require('whatwg-fetch');
 
@@ -85,8 +89,7 @@ login = function (res) {
         type: 'LOGIN_SUCCESS',
         results: res,
     });
-    // renderApp();
-    // toUrl('/u/' + res.username);
+    return res;
 };
 
 
@@ -99,7 +102,7 @@ errOut = function (err) {
         type: 'LOGIN_FAILURE',
         error: errormsg,
     });
-    // toUrl('/login');
+    throw err;
 };
 
 
@@ -112,19 +115,43 @@ toUrl = function(url) {
 
 
 /**
+ * Check to see if there is currently a session and try to logged
+ * into the app.
+ */
+tryLogin = function() {
+    return fetch('/session/login', {
+        method: 'POST',
+        credentials: 'include',
+    })
+    .then(checkStatus)
+    .then(parseJSON)
+    .then(login)
+    .catch(errOut);
+};
+
+
+redirectToPersonalPage = function(res) {
+    var username = store.getState().loginState.username;
+    toUrl('/u/' + username);
+};
+
+
+redirectToLoginPage = function(err) {
+    toUrl('/login');
+}
+
+
+/**
  * fetches the login information and redirects
  * the user to the appropriate location
  */
 redirect = function() {
-    fetch('/session/login', {
-        method: 'POST',
-        credentials: 'include',
-    })
-        .then(checkStatus)
-        .then(parseJSON)
-        .then(login)
-        .catch(errOut);
+    return tryLogin()
+    .then(redirectToPersonalPage)
+    .catch(redirectToLoginPage);
 };
+
+
 
 /**
  * Set up the Routes for the React app
@@ -151,13 +178,13 @@ AppRoute = React.createClass({
         return (
             <Provider store={store}>
                 <Router history={browserHistory} >
-                    <Route path="/" onEnter={redirect}>
-                        <IndexRoute component={AppLayout} onEnter={redirect} />
-                        <Route path="u/:username" component={AppLayout} onEnter={requiresLogin}>
+                    <Route path="/" component={AppContainer} onEnter={tryLogin}>
+                        <IndexRoute onEnter={redirect} />
+                        <Route path="u/:username" component={AppLayout} >
                             <Route path="i/:image" component={Overlay} />
                         </Route>
-                        <Route path="login" component={LoginLayout} onEnter={requiresLogout} />
-                        <Route path="signup" component={SignupLayout} onEnter={requiresLogout} />
+                        <Route path="login" component={LoginLayout} />
+                        <Route path="signup" component={SignupLayout} />
                     </Route>
                 </Router>
             </Provider>
