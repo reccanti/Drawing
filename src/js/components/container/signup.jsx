@@ -39,7 +39,7 @@ var SignupLayout = React.createClass({
                     type: 'LOGIN_SUCCESS',
                     results: result,
                 });
-                browserHistory.push('/u/' + result.username); // redirect to root after signup
+                browserHistory.push('/'); // redirect to root after signup
             },
             error: function (xhr) {
                 var errormsg = JSON.parse(xhr.responseText);
