@@ -48,7 +48,7 @@ DrawingSchema.methods.toAPI = function () {
  */
 DrawingSchema.statics.findById = function (id, callback) {
     var search = {
-        _id: id
+        _id: id,
     };
     return DrawingModel
         .findOne(search)

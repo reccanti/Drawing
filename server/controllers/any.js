@@ -11,20 +11,19 @@ var anyURL = function (req, res) {
     /* eslint no-param-reassing: 0 */
     if (req.uName && req.imageId) {
         Drawing.Model.findById(req.imageId, function (err, doc) {
+            var api;
             if (err) {
+                /* eslint no-console: 0 */
                 console.error(err);
             }
-            var api = doc.toAPI();
-            console.log(api);
+            api = doc.toAPI();
             settings.message = 'A drawing by ' + req.uName;
             settings.image = api.image;
             res.render('index', settings);
         });
-        
     } else {
         res.render('index', settings);
     }
-
 };
 
 module.exports = anyURL;
