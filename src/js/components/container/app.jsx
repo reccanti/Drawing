@@ -144,7 +144,6 @@ AppLayout = React.createClass({
                 <div>
                     {this.props.children}
                 </div>
-                {overlay}
             </div>
         );
     },

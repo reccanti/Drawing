@@ -15,6 +15,7 @@ var LoginLayout = require('./login.jsx');
 var AppLayout = require('./app.jsx');
 var Overlay = require('./overlay.jsx');
 var AppContainer = require('./main.jsx');
+var CanvasDisplay = require('./canvasDisplay.jsx');
 
 var requiresLogin;
 var requiresLogout;
@@ -181,6 +182,7 @@ AppRoute = React.createClass({
                     <Route path="/" component={AppContainer} onEnter={tryLogin}>
                         <IndexRoute onEnter={redirect} />
                         <Route path="u/:username" component={AppLayout} >
+                            <Route path="new" component={CanvasDisplay} />
                             <Route path="i/:image" component={Overlay} />
                         </Route>
                         <Route path="login" component={LoginLayout} />

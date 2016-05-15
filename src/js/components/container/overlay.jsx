@@ -30,9 +30,18 @@ var Overlay = React.createClass({
 
 
     /**
+     * This handles the rendering of the overlay.
+     * This function will be called depending on the state
+     */
+    renderOverlay: function () {
+
+    },
+    
+    
+    /**
      * Render the Login Form
      */
-    render: function renderComponent() {
+    render: function () {
         return (
             <div className="overlay" onClick={this.closeOverlay} >
                 <a
