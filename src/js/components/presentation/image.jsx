@@ -6,13 +6,15 @@ var DrawingImage = function (props) {
     return (
         <div>
             <img className="Timeline_image card" src={props.dataURL} />
-            <div className="right">
-                <FacebookButton
-                  className="btn-floating btn-small waves-effect waves-light blue"
-                  url={window.url + '/i/' + props.id}
-                >
-                    {"f"}
-                </FacebookButton>
+            <div>
+                <div className="right">
+                    <FacebookButton
+                    className="btn-floating btn-small waves-effect waves-light blue"
+                    url={window.url + '/i/' + props.id}
+                    >
+                        {"f"}
+                    </FacebookButton>
+                </div>
             </div>
         </div>
     );
