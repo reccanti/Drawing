@@ -9,5 +9,5 @@ router.post('/getImage',
             function (req, res) {
                 Drawing.getImageById(req, res);
             });
-            
+
 module.exports = router;

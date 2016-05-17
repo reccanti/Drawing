@@ -10,9 +10,7 @@ var anyURL = function (req, res) {
     settings.message = 'Make and share drawings quickly';
     /* eslint no-param-reassing: 0 */
     if (req.uName && req.imageId) {
-        Drawing.Model.findById(req.imageId, function (err, doc) {
-            console.log(doc);
-            var api;
+        Drawing.Model.findById(req.imageId, function (err) {
             if (err) {
                 /* eslint no-console: 0 */
                 console.error(err);

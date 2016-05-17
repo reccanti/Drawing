@@ -61,7 +61,7 @@ var getImageById = function (req, res) {
         }
         drawing = doc.toAPI();
         res.status(200).json({
-            image: drawing.image
+            image: drawing.image,
         });
     });
 };
