@@ -9,22 +9,6 @@ html(lang="en", prefix="og: http://ogp.me/ns#")
         meta(property="og:description", content=message)
         meta(property="og:type", content="website")
     body
-        script.
-            window.fbAsyncInit = function() {
-                FB.init({
-                appId      : '222823994764251',
-                xfbml      : true,
-                version    : 'v2.6'
-                });
-            };
-
-            (function(d, s, id){
-                var js, fjs = d.getElementsByTagName(s)[0];
-                if (d.getElementById(id)) {return;}
-                js = d.createElement(s); js.id = id;
-                js.src = "//connect.facebook.net/en_US/sdk.js";
-                fjs.parentNode.insertBefore(js, fjs);
-            }(document, 'script', 'facebook-jssdk'));
         #container
         script(src="/assets/js/componentsbundle.js")
         script(src="/assets/js/jquery.js")
