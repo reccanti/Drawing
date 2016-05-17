@@ -4,6 +4,7 @@
 @import "layout/layout";
 
 @import "components/DrawingCanvas";
+@import "components/Header";
 
 // temporary fix for moving checkbox label
 [type="radio"]:not(:checked) + label,

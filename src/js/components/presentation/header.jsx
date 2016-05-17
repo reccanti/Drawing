@@ -4,7 +4,7 @@ var Link = require('react-router').Link;
 var Header = function (props) {
     // var canvasPath = 'u/' + this.props.params.username + '/new';
     return (
-        <div className="navbar-fixed">
+        <div className="navbar-fixed Header">
             <nav>
                 <div className="nav-wrapper">
                 <Link to="/" className="brand-logo">Drawings</Link>
