@@ -21,6 +21,7 @@ combinedReducers = Redux.combineReducers({
     loginState: reducers.Login,
     overlayState: reducers.Overlay,
     timelineState: reducers.Timeline,
+    selectedImageState: reducers.SelectedImage,
 });
 DrawingStore = Redux.createStore(
     combinedReducers,

@@ -72,9 +72,6 @@ var signup = function (req, res) {
  * Get all of the images that belong to a specific user
  */
 var getImages = function (req, res) {
-    console.log('getting images');
-    console.log(req.params);
-    console.log(req.body);
     if (!req.body.username) {
         return res.status(400).json({ error: 'username is required' });
     }

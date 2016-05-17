@@ -46,5 +46,26 @@ var getImages = function (req, res) {
     });
 };
 
+
+/**
+ * Gets a single image by its id
+ */
+var getImageById = function (req, res) {
+    if (!req.body.id) {
+        return res.status(400).json({ error: 'id is required' });
+    }
+    Drawing.Model.findById(req.body.id, function (err, doc) {
+        var drawing;
+        if (err) {
+            return res.status(400).json({ error: 'drawing with that id not found' });
+        }
+        drawing = doc.toAPI();
+        res.status(200).json({
+            image: drawing.image
+        });
+    });
+};
+
 module.exports.saveImage = saveImage;
 module.exports.getImages = getImages;
+module.exports.getImageById = getImageById;
