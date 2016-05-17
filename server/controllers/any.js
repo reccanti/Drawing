@@ -7,6 +7,7 @@ var Drawing = require('../models/Drawing');
 var anyURL = function (req, res) {
     var settings = {};
 
+    console.log("called");
     settings.message = 'Make and share drawings quickly';
     /* eslint no-param-reassing: 0 */
     if (req.uName && req.imageId) {
