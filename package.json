@@ -9,10 +9,12 @@
     "test": "NODE_ENV=test mocha --require ./test/jsdomSetup.js --compilers js:babel-register --recursive ./test",
     "buildReact": "gulp react",
     "coverage": "NODE_ENV=test DEBUG=false istanbul cover _mocha --  --require ./test/jsdomSetup.js --compilers js:babel-register --recursive ./test",
-    "start": "gulp build && node ./bin/www",
+    "start": "webpack && node ./bin/www",
     "debug": "gulp react && DEBUG=express:* node ./bin/www",
     "watch": "gulp watch",
-    "build": "gulp clean && gulp build"
+    "build": "gulp clean && gulp build",
+    "dev": "webpack-dev-server --hot --inline --overlay",
+    "webpack": "webpack"
   },
   "author": "Ben Wilcox",
   "license": "MIT",
@@ -62,7 +64,9 @@
     "whatwg-fetch": "^0.11.0"
   },
   "devDependencies": {
+    "babel-core": "^6.24.0",
     "babel-jest": "^9.0.3",
+    "babel-loader": "^6.4.0",
     "babel-preset-es2015": "*",
     "babel-preset-react": "*",
     "babel-register": "*",
@@ -83,7 +87,9 @@
     "redux-devtools": "^3.1.1",
     "streamify": "^0.2.5",
     "supertest": "^1.2.0",
-    "watchify": "^3.7.0"
+    "watchify": "^3.7.0",
+    "webpack": "^2.2.1",
+    "webpack-dev-server": "^2.4.1"
   },
   "browserify": {
     "transform": [

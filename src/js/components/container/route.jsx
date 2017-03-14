@@ -195,27 +195,4 @@ AppRoute = React.createClass({
     }
 });
 
-
-
- /**
-  * Check for a session, and if it exists, store
-  * the logged in information.
-  */
-// fetch('/session/login', {
-//     method: 'POST',
-//     credentials: 'include',
-// })
-//     .then(checkStatus)
-//     .then(parseJSON)
-//     .then(login)
-//     .catch(function (err) {
-//         var errormsg = err.response;
-//         store.dispatch({
-//             type: 'LOGIN_FAILURE',
-//             error: errormsg,
-//         });
-//         renderApp();
-//     });
-    
-    
 module.exports = AppRoute;

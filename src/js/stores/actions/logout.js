@@ -1,6 +1,7 @@
 var logout;
 var checkStatus;
 var getImage;
+var logoutComplete;
 require('whatwg-fetch');
        
 /**

@@ -1,3 +1,4 @@
+var component;
 var React = require('react');
 var connect = require('react-redux').connect;
 var Overlay = require('./overlay.jsx');
