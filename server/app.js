@@ -70,12 +70,12 @@ app.set('views', path.resolve(__dirname + '/views'));
 /**
  * Fetch the Favion
  */
-if (process.env.NODE_ENV === 'test') {
-    app.use(favicon(path.resolve(__dirname, "../src/favicon.png")));   
-} else {
-    console.log(process.env.NODE_ENV);
-    app.use(favicon(path.resolve(__dirname, "../dist/favicon.png")));
-}
+// if (process.env.NODE_ENV === 'test') {
+//     app.use(favicon(path.resolve(__dirname, "../src/favicon.png")));   
+// } else {
+//     console.log(process.env.NODE_ENV);
+//     app.use(favicon(path.resolve(__dirname, "../dist/favicon.png")));
+// }
 
 app.disable('x-powered-by');
 app.use(cookieParser());

@@ -40,6 +40,14 @@ module.exports = {
     },
     plugins: [
         extractSass
-    ]
+    ],
+
+    /**
+     * Dev server configuration
+     */
+    devServer: {
+        publicPath: path.resolve(__dirname, 'dist'),
+        hot: true
+    }
 }
 
