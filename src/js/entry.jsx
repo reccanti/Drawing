@@ -1,6 +1,7 @@
 var React = require('react');
 var ReactDOM = require('react-dom');
-var AppRoute = require('./components/container/route.jsx');
+// var AppRoute = require('./components/container/route.jsx');
+import AppRoute from './components/container/route.jsx';
 // var store = require('./stores/reduxStore.js');
 
 // var renderApp;

@@ -1,28 +1,38 @@
-var React = require('react');
-var store = require('../../stores/reduxStore.js');
-var connect = require('react-redux').connect;
+// var React = require('react');
+// var store = require('../../stores/reduxStore.js');
+// var connect = require('react-redux').connect;
 
-var Router = require('react-router');
-var Link = Router.Link;
-var browserHistory = Router.browserHistory;
+// var Router = require('react-router');
+// var Link = Router.Link;
+// var browserHistory = Router.browserHistory;
 
-var Overlay = require('./overlay.jsx');
-var CanvasContainer = require('./canvasContainer.jsx');
-var TimelineContainer = require('./timelineContainer.jsx');
-// var DrawingCanvas = require('../presentation/canvas.jsx');
+// var Overlay = require('./overlay.jsx');
+// var CanvasContainer = require('./canvasContainer.jsx');
+// var TimelineContainer = require('./timelineContainer.jsx');
+// // var DrawingCanvas = require('../presentation/canvas.jsx');
 
-var AppLayout;
-var component;
+// var AppLayout;
+// var component;
 
-require('whatwg-fetch');
+import React, { Component, PropTypes } from 'react';
+import store from '../../stores/reduxStore';
+import { connect } from 'react-redux';
 
+import Router, { Link, browserHistory } from 'react-router';
+
+import Overlay from './overlay.jsx';
+import CanvasContainer from './canvasContainer.jsx';
+import TimelineContainer from './timelineContainer.jsx';
+
+import 'whatwg-fetch';
 
 /**
  * This is mostly for testing right now. The app will
  * render a username taken from the store.
  */
 /* eslint quote-props: 0 */
-AppLayout = React.createClass({
+
+const AppLayoutOrig = React.createClass({
 
 
     /**
@@ -144,20 +154,112 @@ AppLayout = React.createClass({
     },
 });
 
+/**
+ * This is mostly for testing right now. The app will
+ * render a username taken from the store.
+ */
+/* eslint quote-props: 0 */
+class AppLayout extends Component {
+    /**
+     * Set initial properties
+     */
+    static propTypes = {
+        username: PropTypes.string,
+        displayOverlay: PropTypes.bool
+    }
+    
+    state = {
+        overlay: false,
+        dataURLs: []
+    }
+
+    /**
+     * Sets the initial state of the component
+     * @param {*} props the props passed to the components
+     */
+    constructor(props) {
+        super(props);
+    }
+
+    /**
+     * Log the user out of the system
+     */
+    _logout (e) {
+        e.preventDefault();
+        fetch('/session/logout', {
+            method: 'POST',
+            credentials: 'include'
+        })
+        .then(() => {
+            store.dispatch({
+                type: 'LOGOUT'
+            });
+        });
+    }
+
+    /**
+     * Tells the app to hide the overlay by
+     * setting the state
+     */
+    _closeOverlay () {
+        store.dispatch({
+            type: 'OVERLAY_CLOSE',
+            open: false
+        });
+    }
+
+    /**
+     * Tells the app to open the overlay by
+     * setting the state
+     */
+    _openOverlay () {
+        store.dispatch({
+            type: 'OVERLAY_OPEN',
+            open: true
+        });
+    }
+
+    /**
+     * Render the app screen
+     */
+    render() {
+        // get the username text if the user is logged in
+        const userText = this.props.username ? this.props.username : 'Not currently logged in';
+
+        return (
+            <div>
+                <div className='Main row'>
+                    <TimelineContainer username={this.props.params.username} />
+                </div>
+                <div>
+                    {this.props.children}
+                </div>
+            </div>
+        );
+    }
+}
+
+/**
+ * Maps the state of the application to the props of
+ * the component
+ */
+const mapStateToProps = (connectStore) => {
+    return {
+        username: connectStore.loginState.username,
+        displayOverlay: connectStore.overlayState.open,
+    };
+}
 
 /**
  * This component connects the AppLayout with the store,
  * assigning the username as a prop
  */
-component = connect(function (connectStore) {
-    return {
-        username: connectStore.loginState.username,
-        displayOverlay: connectStore.overlayState.open,
-    };
-})(AppLayout);
+const component = connect(
+    mapStateToProps
+)(AppLayout);
 
 
 /**
- * Export th connected component
+ * Export the connected component
  */
-module.exports = component;
+export { component as AppLayout };

@@ -1,18 +1,23 @@
 var React = require('react');
 // var ReactDOM = require('react-dom');
 
-var ReactRouter = require('react-router');
-var Router = ReactRouter.Router;
-var Route = ReactRouter.Route;
-var IndexRoute = ReactRouter.IndexRoute;
-var browserHistory = ReactRouter.browserHistory;
+// var ReactRouter = require('react-router');
+// var Router = ReactRouter.Router;
+// var Route = ReactRouter.Route;
+// var IndexRoute = ReactRouter.IndexRoute;
+// var browserHistory = ReactRouter.browserHistory;
+
+import ReactRouter, { Router, Route, IndexRoute, browserHistory } from 'react-router';
 var Provider = require('react-redux').Provider;
 
 var store = require('../../stores/reduxStore.js');
 
 var SignupLayout = require('./signup.jsx');
 var LoginLayout = require('./login.jsx');
-var AppLayout = require('./app.jsx');
+// var AppLayout = require('./app.jsx');
+import { AppLayout } from './app.jsx';
+// console.log(AppLayout);
+
 var Overlay = require('./overlay.jsx');
 var AppContainer = require('./main.jsx');
 var CanvasDisplay = require('./canvasDisplay.jsx');
@@ -195,4 +200,4 @@ AppRoute = React.createClass({
     }
 });
 
-module.exports = AppRoute;
+export default AppRoute;
